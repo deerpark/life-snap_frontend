@@ -8,7 +8,7 @@ import { DateRange, SelectRangeEventHandler } from "react-day-picker"
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
 
-import { DATE_FORMAT } from "@src/lib/constants"
+import { DATE_FORMAT, PAGE_SIZE } from "@src/lib/constants"
 import { KEY } from "@src/lib/enum"
 import { dateFormat } from "@src/lib/utils"
 import { GetSnapsParams } from "@src/type"
@@ -30,7 +30,7 @@ const useSessionStore = create<SessionState>()(
     (set, get) => ({
       params: {
         page: 1,
-        page_size: 20,
+        page_size: PAGE_SIZE[1],
       },
       date: {
         from: undefined,

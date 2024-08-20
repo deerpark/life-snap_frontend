@@ -10,9 +10,16 @@ type ImageProps = {
   fallbackIcon?: React.ReactNode
   containerClassName?: string
   className?: string
+  onClick?: React.MouseEventHandler<HTMLImageElement>
+  setDimensions?: React.Dispatch<
+    React.SetStateAction<{
+      width: number
+      height: number
+    } | null>
+  >
 }
 
-export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
+export const Image = React.forwardRef<HTMLImageElement | null, ImageProps>(
   function ImageComponent(
     {
       src,
@@ -21,20 +28,33 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
       fallbackIcon,
       containerClassName,
       className,
+      onClick,
+      setDimensions,
     }: ImageProps,
     ref
   ) {
     const [loading, setLoading] = React.useState(true)
     const [error, setError] = React.useState(false)
+    const imgRef = React.useRef<HTMLImageElement | null>(null)
 
     const handleLoad = () => {
       setLoading(false)
+      if (!imgRef.current) return
+      const { naturalWidth, naturalHeight } = imgRef.current
+      setDimensions &&
+        setDimensions({ width: naturalWidth, height: naturalHeight })
     }
 
     const handleError = () => {
       setLoading(false)
       setError(true)
     }
+
+    React.useImperativeHandle<HTMLImageElement | null, HTMLImageElement | null>(
+      ref,
+      () => imgRef.current,
+      []
+    )
 
     return (
       <div
@@ -49,7 +69,7 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
         )}
         {!error ? (
           <motion.img
-            ref={ref}
+            ref={imgRef}
             src={src}
             alt={alt}
             onLoad={handleLoad}
@@ -61,6 +81,7 @@ export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
             transition={{ duration: 0.3 }}
             className={cn("w-full object-cover", className)}
             style={loading ? { display: "none" } : {}}
+            onClick={onClick}
           />
         ) : fallbackIcon ? (
           <div className="absolute inset-0 flex items-center justify-center">

@@ -1,6 +1,7 @@
 import { CircleFadingPlus, Filter as FilterIcon, X } from "lucide-react"
 
 import { Button } from "@src/components/ui/button"
+import { PAGE_SIZE } from "@src/lib/constants"
 import useLocalStore from "@src/stores/local.store"
 import useSessionStore from "@src/stores/session.store"
 import { Snap } from "@src/type/snap.schema"
@@ -19,8 +20,9 @@ const facetedFilters = columns
   .map((col) => (col as RowCustomColumn).accessorKey)
 
 export function Toolbar() {
-  const { columnFilters, setColumnFilters } = useSessionStore(
-    ({ columnFilters, setColumnFilters }) => ({
+  const { params, columnFilters, setColumnFilters } = useSessionStore(
+    ({ params, columnFilters, setColumnFilters }) => ({
+      params,
       columnFilters,
       setColumnFilters,
     })
@@ -31,7 +33,12 @@ export function Toolbar() {
     filterOptions,
   }))
 
-  const hasFilter = columnFilters.some((f) => (f.value as string[])?.length)
+  const hasParam = Object.entries(params)
+    .filter(([key]) => ["start_date", "age", "grade", "job"].includes(key))
+    .some((p) => !!p[1])
+  const hasFacetedFilter = columnFilters.some(
+    (f) => (f.value as string[])?.length
+  )
 
   return (
     <div className="flex-none flex flex-col xl:flex-row xl:items-center gap-y-4 xl:gap-y-0 xl:gap-x-4 px-4">
@@ -43,6 +50,22 @@ export function Toolbar() {
         <Filter className="flex-none" column="job" options={jobs} />
         <Filter className="flex-none" column="grade" options={grades} />
         <Filter className="flex-none" column="age" options={ages} />
+        {hasParam ? (
+          <Button
+            variant="ghost"
+            onClick={() =>
+              useSessionStore.setState(() => ({
+                params: {
+                  page: 1,
+                  page_size: PAGE_SIZE[1],
+                },
+              }))
+            }
+            className="flex items-center px-3 2xl:px-3 py-1 2xl:py-2 gap-x-1 2xl:gap-x-2 h-7 2xl:h-auto">
+            <span className="font-bold text-destructive">초기화</span>
+            <X className="size-3 2xl:size-4 text-destructive" />
+          </Button>
+        ) : null}
       </div>
       <div className="flex-none flex items-center gap-x-3 2xl:gap-x-4 gap-y-3 2xl:gap-y-4 flex-wrap">
         <div className="flex items-center gap-x-1 pl-4 xl:pl-auto  text-muted-foreground">
@@ -57,7 +80,7 @@ export function Toolbar() {
             className="flex-none"
           />
         ))}
-        {hasFilter ? (
+        {hasFacetedFilter ? (
           <Button
             variant="ghost"
             onClick={() => setColumnFilters([])}

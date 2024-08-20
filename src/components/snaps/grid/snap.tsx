@@ -72,13 +72,15 @@ export function SnapItem({ snap }: SnapItemProps) {
     <div
       key={snap.snap_id}
       className={cn(
-        "hover:bg-accent transition-colors rounded-2xl flex flex-col gap-y-2",
-        isViewing ? "bg-yellow-50 dark:bg-yellow-950" : ""
+        "group/snap transition-colors rounded-2xl flex flex-col gap-y-2",
+        isViewing
+          ? "bg-primary text-primary-foreground ring ring-primary"
+          : "hover:bg-accent"
       )}>
       <Card
         className={cn(
           "group relative rounded-2xl overflow-hidden shadow-none hover:scale-105 hover:shadow transition-all",
-          isViewing ? "ring ring-primary" : ""
+          isViewing ? "ring ring-primary border-primary/80" : ""
         )}>
         <Image
           src={imageSrc}
@@ -130,37 +132,38 @@ export function SnapItem({ snap }: SnapItemProps) {
         </div>
       </Card>
       <div className="px-2 pb-4 space-y-1">
-        <div className="flex items-center gap-x-3">
-          <div className="flex-1 font-bold text-sm flex items-center gap-x-1">
+        <div className="flex items-center gap-x-3 flex-wrap">
+          <div className="grow font-bold text-sm flex items-center gap-x-1">
             <span>{snap.tpo}</span>
           </div>
-          <div className="flex-none text-[11px] font-semibold text-muted-foreground/70">
+          <div className="flex-none text-[11px] font-semibold opacity-50">
             {format(
               parse(`${snap.image_date}`, DATE_FORMAT.DATE_MINI, new Date()),
               DATE_FORMAT.DATE_WITH_YEAR
             )}
           </div>
         </div>
-        <div className="flex text-[11px]/[14px] items-center gap-x-3 font-semibold text-foreground/70">
+        <div className="flex text-[11px]/[14px] items-center gap-x-2 font-semibold opacity-70 flex-wrap">
           {columnVisibility["birth_year"] !== false ? (
             <>
-              <div className={cn("flex-none flex items-center gap-x-1")}>
+              <div className={cn("flex items-center gap-x-1")}>
                 <span className="rounded">{YEAR - snap.birth_year}세</span>
               </div>
-              <Separator className="size-1 rounded bg-muted-foreground/50" />
+              <Separator className="size-[3px] rounded" />
             </>
           ) : null}
           {columnVisibility["city"] !== false ? (
-            <div className={cn("flex-1 flex items-center gap-x-1")}>
+            <div className={cn("grow flex items-center gap-x-1")}>
               <span className="rounded">{snap.city}</span>
             </div>
           ) : null}
           {columnVisibility["grade"] !== false ? (
-            <div className={cn("flex-none flex items-center gap-x-1")}>
+            <div className={cn("flex items-center gap-x-1")}>
               <span
                 className={cn(
-                  "font-bold rounded",
-                  GRADE_COLOR.BADGE[snap.grade] || GRADE_COLOR.BADGE.DEFAULT
+                  "font-bold rounded px-0.5",
+                  GRADE_COLOR.BADGE[snap.grade] || GRADE_COLOR.BADGE.DEFAULT,
+                  isViewing ? "bg-background" : ""
                 )}>
                 {snap.grade}
               </span>

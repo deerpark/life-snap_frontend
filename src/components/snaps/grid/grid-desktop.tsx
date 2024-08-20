@@ -29,7 +29,9 @@ export function GridDesktop() {
   return (
     <ResizablePanelGroup direction="horizontal" className="flex-1">
       <ResizablePanel
-        id="masonry"
+        id="panel-left"
+        order={1}
+        minSize={50}
         defaultSize={snap ? 80 : 100}
         className="flex flex-col">
         <ScrollArea className="flex-1">
@@ -44,8 +46,13 @@ export function GridDesktop() {
       </ResizablePanel>
       {snap ? (
         <>
-          <ResizableHandle id="snap-info-grab" withHandle />
-          <ResizablePanel id="snap-info" defaultSize={20} className="relative">
+          <ResizableHandle withHandle />
+          <ResizablePanel
+            id="panel-right"
+            minSize={15}
+            order={2}
+            defaultSize={20}
+            className="relative">
             <Button
               variant="secondary"
               size="icon"

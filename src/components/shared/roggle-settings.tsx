@@ -39,7 +39,7 @@ export function ToggleSettings({ className }: ToggleSettingsProps) {
         <Settings2 size={20} strokeWidth={2.5} />
         {isSettingsOpen ? (
           <>
-            <ChevronLeft
+            <ChevronRight
               size={14}
               strokeWidth={3}
               className="hidden lg:block"
@@ -48,7 +48,7 @@ export function ToggleSettings({ className }: ToggleSettingsProps) {
           </>
         ) : (
           <>
-            <ChevronRight
+            <ChevronLeft
               size={14}
               strokeWidth={3}
               className="hidden lg:block"
