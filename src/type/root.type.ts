@@ -2,6 +2,12 @@ import { JwtPayload } from "@type/index"
 
 export type Theme = "light" | "dark"
 
+export type Toggle = {
+  settings: boolean
+  filter: boolean
+  facetedFilter: boolean
+}
+
 export type ViewType = "/snaps/grid" | "/snaps/list"
 
 export interface FacetedOption {

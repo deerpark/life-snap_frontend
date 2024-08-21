@@ -22,9 +22,12 @@ export function SnapItem({ snap }: SnapItemProps) {
   const { snap: snapInfo } = useRootStore(({ snap }) => ({
     snap,
   }))
-  const { columnVisibility } = useLocalStore(({ columnVisibility }) => ({
-    columnVisibility,
-  }))
+  const { isFixedAspect, columnVisibility } = useLocalStore(
+    ({ isFixedAspect, columnVisibility }) => ({
+      isFixedAspect,
+      columnVisibility,
+    })
+  )
 
   const isViewing = snapInfo?.snap_id === snap.snap_id
 
@@ -80,9 +83,11 @@ export function SnapItem({ snap }: SnapItemProps) {
       <Card
         className={cn(
           "group relative rounded-2xl overflow-hidden shadow-none hover:scale-105 hover:shadow transition-all",
-          isViewing ? "ring ring-primary border-primary" : ""
+          isViewing ? "ring ring-primary border-primary" : "",
+          isFixedAspect ? "aspect-video" : ""
         )}>
         <Image
+          className={cn(isFixedAspect ? "aspect-video" : "")}
           src={imageSrc}
           loadingIcon={
             <Shell

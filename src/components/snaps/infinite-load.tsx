@@ -53,7 +53,13 @@ export function InfiniteLoad({ isEmpty }: InfiniteLoadProps) {
     return (
       <Empty
         className="flex-1 !py-36"
-        icon={<BoxSelect size={48} className="text-foreground/70" />}
+        icon={
+          <BoxSelect
+            size={48}
+            strokeWidth={1.5}
+            className="text-foreground/70"
+          />
+        }
         title="스냅이 존재하지 않습니다."
         description="검색 조건을 변경하거나 관리자에게 스냅등록을 요청 해 주세요"
       />
@@ -61,7 +67,13 @@ export function InfiniteLoad({ isEmpty }: InfiniteLoadProps) {
   return (
     <Empty
       className="min-h-40"
-      icon={<CheckCheck size={48} className="text-muted-foreground" />}
+      icon={
+        <CheckCheck
+          size={48}
+          strokeWidth={1.5}
+          className="text-muted-foreground"
+        />
+      }
       description="데이터를 모두 불러왔습니다."
     />
   )

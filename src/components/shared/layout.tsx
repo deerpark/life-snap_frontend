@@ -14,8 +14,8 @@ import { Tip } from "@components/ui/tooltip"
 import { SnapSearch } from "@components/snaps/search"
 
 import { DatePickerWithRange } from "../snaps/date-range-picker"
-import { ToggleSettings } from "./roggle-settings"
 import { Settings } from "./settings"
+import { ToggleButton } from "./toggle"
 
 export default function Layout() {
   const token = useSearchParam("token")
@@ -62,12 +62,15 @@ export default function Layout() {
           </Tip>
           <div className="flex-1 lg:hidden" />
           <DatePickerWithRange className="flex-none" />
-          <ToggleSettings className="ml-3 lg:ml-0" />
+          <ToggleButton
+            toggleKey="settings"
+            className="ml-3 lg:ml-0 lg:hidden"
+          />
         </div>
         <div className="flex-1 flex items-center">
           <SnapSearch />
         </div>
-        <ToggleSettings className="hidden lg:flex" />
+        <ToggleButton toggleKey="settings" className="hidden lg:flex" />
         <Settings />
       </header>
       <Separator className="lg:hidden opacity-50 mt-4 mb-6" />

@@ -65,19 +65,15 @@ export function DataViewOptions({ className }: DataViewOptionsProps) {
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
         <div>
-          <Tip content="속성 사용자화" className="2xl:hidden">
+          <Tip content="속성 사용자화">
             <Button
               variant="ghost"
               className={cn(
-                "flex items-center px-3 2xl:px-3 py-1 2xl:py-2 gap-x-1 2xl:gap-x-2 h-7 2xl:h-auto",
+                "flex-none flex items-center gap-x-3 text-muted-foreground text-base",
                 isOpen ? "bg-accent" : "",
                 className
-              )}
-              title="속성 사용자화">
-              <Eye size={20} />
-              <span className="flex-1 font-bold hidden 2xl:block">
-                속성 사용자화
-              </span>
+              )}>
+              <Eye size={20} strokeWidth={2.5} />
               {isOpen ? (
                 <ChevronUp size={16} strokeWidth={3} />
               ) : (

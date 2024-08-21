@@ -6,10 +6,10 @@ import { ModeToggle } from "./mode-toggle"
 import { ViewToggle } from "./view-toggle"
 
 export function Settings() {
-  const { isSettingsOpen } = useLocalStore(({ isSettingsOpen }) => ({
-    isSettingsOpen,
+  const { settings } = useLocalStore(({ toggle: { settings } }) => ({
+    settings,
   }))
-  return isSettingsOpen ? (
+  return settings ? (
     <div className="flex-none flex items-center gap-x-6">
       <ViewToggle />
       <ModeToggle />

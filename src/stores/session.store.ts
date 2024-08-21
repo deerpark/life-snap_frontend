@@ -36,11 +36,10 @@ const useSessionStore = create<SessionState>()(
         from: undefined,
       },
       setDate: (date) => {
-        if (date && date.from && date.to) {
-          const start_date = dateFormat(
-            startOfDay(date.from),
-            DATE_FORMAT.DATE_MINI
-          )
+        if (date && date.to) {
+          const start_date = date.from
+            ? dateFormat(startOfDay(date.from), DATE_FORMAT.DATE_MINI)
+            : undefined
           const end_date = dateFormat(endOfDay(date.to), DATE_FORMAT.DATE_MINI)
           set(() => ({
             params: {
@@ -50,8 +49,8 @@ const useSessionStore = create<SessionState>()(
             },
             date,
           }))
-          sessionStorage.setItem(KEY.SEED, "null")
         }
+        sessionStorage.setItem(KEY.SEED, "null")
       },
       filter: "",
       setFilter: (filter) => set({ filter }),

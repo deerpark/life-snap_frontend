@@ -6,14 +6,16 @@ import {
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
 
-import { SnapFilterFacetedOptions, Theme, ViewType } from "@src/type"
+import { SnapFilterFacetedOptions, Theme, Toggle, ViewType } from "@src/type"
 
 type ThemeState = {
-  isSettingsOpen: boolean
+  toggle: Toggle
   theme: Theme
+  setTheme: (theme: Theme) => void
+  isFixedAspect: boolean
+  setFixedAspect: (isFixedAspect: boolean) => void
   viewType: ViewType
   columnsCountBreakPoints?: Record<number, number>
-  setTheme: (theme: Theme) => void
   columns: unknown[]
   columnVisibility: VisibilityState
   setColumnVisibility: OnChangeFn<VisibilityState>
@@ -26,8 +28,15 @@ type ThemeState = {
 const useLocalStore = create<ThemeState>()(
   persist(
     (set) => ({
-      isSettingsOpen: true,
+      toggle: {
+        settings: false,
+        filter: true,
+        facetedFilter: false,
+      },
       theme: "light",
+      setTheme: (theme) => set({ theme }),
+      isFixedAspect: false,
+      setFixedAspect: (isFixedAspect) => set({ isFixedAspect }),
       viewType: "/snaps/grid",
       columnsCountBreakPoints: {
         350: 1,
@@ -39,7 +48,6 @@ const useLocalStore = create<ThemeState>()(
         1524: 7,
         1744: 8,
       },
-      setTheme: (theme) => set({ theme }),
       columns: [],
       columnVisibility: {},
       setColumnVisibility: (updater) =>

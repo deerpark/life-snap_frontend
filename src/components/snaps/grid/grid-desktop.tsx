@@ -37,7 +37,9 @@ export function GridDesktop() {
 
   return (
     <>
-      <ResizablePanelGroup direction="horizontal" className="flex-1">
+      <ResizablePanelGroup
+        direction="horizontal"
+        className="flex-1 border-t border-border/50">
         <ResizablePanel
           id="panel-left"
           order={1}

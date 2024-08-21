@@ -13,7 +13,11 @@ export function ListView() {
   const { params } = useSessionStore(({ params }) => ({ params }))
   const { isLoading, data, isError } = useFetchSnaps({
     ...params,
-    seed: JSON.stringify(sessionStorage.getItem(KEY.SEED)),
+    seed: JSON.parse(sessionStorage.getItem(KEY.SEED) || "null") as
+      | string
+      | number
+      | null
+      | undefined,
   })
 
   React.useEffect(() => {

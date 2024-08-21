@@ -1,4 +1,4 @@
-import { Snap } from "@src/type"
+import { Snap, Toggle } from "@src/type"
 
 export const TITLE = "LIFE SNAP"
 
@@ -75,3 +75,9 @@ export const PROPERTY_LABEL: Record<keyof Snap, string> = {
 export const TODAY = new Date()
 
 export const PAGE_SIZE = [10, 20, 30, 40, 50, 100, 200, 500]
+
+export const TOGGLE_LABEL: Record<keyof Toggle, string> = {
+  settings: "설정",
+  filter: "조건",
+  facetedFilter: "필터",
+}

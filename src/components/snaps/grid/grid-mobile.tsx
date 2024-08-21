@@ -51,14 +51,16 @@ export function GridMobile() {
       </ScrollArea>
       <ImageViewer />
       <Drawer open={!!snap} onOpenChange={toggleSnapDrawer}>
-        <DrawerContent>
+        <DrawerContent className="">
           <DrawerHeader className="text-left pb-0">
             <DrawerTitle className="font-black">{snap?.tpo}</DrawerTitle>
             <DrawerDescription className="text-xs">
               No. {snap?.snap_id}
             </DrawerDescription>
           </DrawerHeader>
-          <SnapInfo />
+          <ScrollArea className="flex-1 flex flex-col max-h-[calc(100vh-200px)]">
+            <SnapInfo />
+          </ScrollArea>
           <DrawerFooter className="pt-2">
             <DrawerClose asChild>
               <Button variant="outline">닫기</Button>

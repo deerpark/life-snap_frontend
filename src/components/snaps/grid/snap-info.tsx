@@ -36,7 +36,7 @@ export function SnapInfo({ header }: SnapInfoProps) {
   if (!snap) return null
   const imageSrc = `${env.VITE_API_BASE_URL}/api/image/${snap.file_name}`
   return (
-    <ScrollArea className="flex-1 flex flex-col h-full px-5 py-2">
+    <ScrollArea className="flex-1 flex flex-col h-full px-5 py-5 md:py-2">
       <div className="text-sm grid gap-3">
         {header ? (
           <h2 className="sticky top-0 py-3 bg-background">
@@ -49,7 +49,7 @@ export function SnapInfo({ header }: SnapInfoProps) {
             <span className="block text-xl font-black">{snap.tpo}</span>
           </h2>
         ) : null}
-        <h3 className="font-semibold sticky top-14 py-3 bg-gradient-to-b from-background via-75% via-background to-transparent">
+        <h3 className="font-semibold sticky top-0 md:top-14 py-3 bg-gradient-to-b from-background via-75% via-background to-transparent">
           기본 정보
         </h3>
         <ul className="grid gap-3">
@@ -65,7 +65,7 @@ export function SnapInfo({ header }: SnapInfoProps) {
           </li>
         </ul>
         <Separator className="my-2" />
-        <h3 className="font-semibold sticky top-14 py-3 bg-gradient-to-b from-background via-75% via-background to-transparent">
+        <h3 className="font-semibold sticky top-0 md:top-14 py-3 bg-gradient-to-b from-background via-75% via-background to-transparent">
           고객 정보
         </h3>
         <ul className="grid gap-3">
@@ -135,7 +135,7 @@ export function SnapInfo({ header }: SnapInfoProps) {
         {columnVisibility["option_values"] !== false ? (
           <>
             <Separator className="my-2" />
-            <h3 className="font-semibold sticky top-14 py-3 bg-gradient-to-b from-background via-75% via-background to-transparent">
+            <h3 className="font-semibold sticky top-0 md:top-14 py-3 bg-gradient-to-b from-background via-75% via-background to-transparent">
               추가 정보
             </h3>
             <ul className="grid gap-3">
@@ -154,7 +154,7 @@ export function SnapInfo({ header }: SnapInfoProps) {
         ) : null}
         <Separator className="my-2" />
         <div className="space-y-4 pb-4">
-          <h3 className="font-semibold sticky top-14 py-3 bg-gradient-to-b from-background via-75% via-background to-transparent">
+          <h3 className="font-semibold sticky top-0 md:top-14 py-3 bg-gradient-to-b from-background via-75% via-background to-transparent">
             이미지
           </h3>
           <ul className="grid gap-3">

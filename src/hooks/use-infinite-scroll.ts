@@ -20,7 +20,16 @@ export const useInfiniteScroll = () => {
     error,
   } = useInfiniteQuery(
     [fetchSnapsKey, params], // params를 포함시켜 키를 유동적으로 생성
-    ({ pageParam = 1 }) => fetchSnaps({ ...params, page: pageParam }),
+    ({ pageParam = 1 }) =>
+      fetchSnaps({
+        ...params,
+        page: pageParam,
+        seed: JSON.parse(sessionStorage.getItem(KEY.SEED) || "null") as
+          | string
+          | number
+          | null
+          | undefined,
+      }),
     {
       getNextPageParam: (lastPage, pages) => {
         if (lastPage.hasMore) {

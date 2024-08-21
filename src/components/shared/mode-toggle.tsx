@@ -7,7 +7,10 @@ import { Tabs, TabsList, TabsTrigger } from "@components/ui/tabs"
 import { Tip } from "@components/ui/tooltip"
 
 export const ModeToggle: React.FC = () => {
-  const { theme, setTheme } = useLocalStore()
+  const { theme, setTheme } = useLocalStore(({ theme, setTheme }) => ({
+    theme,
+    setTheme,
+  }))
 
   return (
     <Tip

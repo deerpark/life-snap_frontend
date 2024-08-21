@@ -62,7 +62,7 @@ export function DatePickerWithRange({
   }, [date.from, date.to, selectedRange?.from, selectedRange?.to])
 
   const handleSaveDateRange = React.useCallback(() => {
-    if (!selectedRange?.from || !selectedRange?.to) return
+    if (!selectedRange?.to) return
     setDate(
       selectedRange,
       selectedRange.to,
