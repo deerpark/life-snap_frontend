@@ -1,3 +1,4 @@
+import * as React from "react"
 import Masonry from "react-responsive-masonry"
 
 import { Button } from "@src/components/ui/button"
@@ -12,6 +13,7 @@ import {
 } from "@src/components/ui/drawer"
 import { ScrollArea } from "@src/components/ui/scroll-area"
 import useRootStore from "@src/stores/root.store"
+import useSessionStore from "@src/stores/session.store"
 
 import { InfiniteLoad } from "../infinite-load"
 import { ImageViewer } from "./image-viewer"
@@ -26,6 +28,11 @@ export function GridMobile() {
       computedSnaps: computedSnaps(),
     })
   )
+  const { columnFilters } = useSessionStore(({ columnFilters }) => ({
+    columnFilters,
+  }))
+
+  React.useEffect(() => {}, [columnFilters])
 
   return (
     <>
