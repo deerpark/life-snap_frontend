@@ -132,6 +132,7 @@ export function Filter({
                         const filterValues = Array.from(selectedValues)
                         const newParams = {
                           ...params,
+                          page: 1,
                           [column]: selectedValues.size
                             ? filterValues.join(",")
                             : undefined,
@@ -168,6 +169,7 @@ export function Filter({
                       useSessionStore.setState(() => ({
                         params: {
                           ...params,
+                          page: 1,
                           [column]: undefined,
                         },
                       }))

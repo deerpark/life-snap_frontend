@@ -1,6 +1,7 @@
 import { CircleFadingPlus, Filter as FilterIcon, X } from "lucide-react"
 
 import { Button } from "@src/components/ui/button"
+import { Tip } from "@src/components/ui/tooltip"
 import { PAGE_SIZE } from "@src/lib/constants"
 import useLocalStore from "@src/stores/local.store"
 import useSessionStore from "@src/stores/session.store"
@@ -51,20 +52,21 @@ export function Toolbar() {
         <Filter className="flex-none" column="grade" options={grades} />
         <Filter className="flex-none" column="age" options={ages} />
         {hasParam ? (
-          <Button
-            variant="ghost"
-            onClick={() =>
-              useSessionStore.setState(() => ({
-                params: {
-                  page: 1,
-                  page_size: PAGE_SIZE[1],
-                },
-              }))
-            }
-            className="flex items-center px-3 2xl:px-3 py-1 2xl:py-2 gap-x-1 2xl:gap-x-2 h-7 2xl:h-auto">
-            <span className="font-bold text-destructive">초기화</span>
-            <X className="size-3 2xl:size-4 text-destructive" />
-          </Button>
+          <Tip content="초기화">
+            <Button
+              variant="ghost"
+              onClick={() =>
+                useSessionStore.setState(() => ({
+                  params: {
+                    page: 1,
+                    page_size: PAGE_SIZE[1],
+                  },
+                }))
+              }
+              className="flex items-center px-3 2xl:px-3 py-1 2xl:py-2 gap-x-1 2xl:gap-x-2 h-7 2xl:h-auto">
+              <X className="size-3 2xl:size-4 text-destructive" />
+            </Button>
+          </Tip>
         ) : null}
       </div>
       <div className="flex-none flex items-center gap-x-3 2xl:gap-x-4 gap-y-3 2xl:gap-y-4 flex-wrap">
@@ -81,13 +83,14 @@ export function Toolbar() {
           />
         ))}
         {hasFacetedFilter ? (
-          <Button
-            variant="ghost"
-            onClick={() => setColumnFilters([])}
-            className="flex items-center px-3 2xl:px-3 py-1 2xl:py-2 gap-x-1 2xl:gap-x-2 h-7 2xl:h-auto">
-            <span className="font-bold text-destructive">초기화</span>
-            <X className="size-3 2xl:size-4 text-destructive" />
-          </Button>
+          <Tip content="초기화">
+            <Button
+              variant="ghost"
+              onClick={() => setColumnFilters([])}
+              className="flex items-center px-3 2xl:px-3 py-1 2xl:py-2 gap-x-1 2xl:gap-x-2 h-7 2xl:h-auto">
+              <X className="size-3 2xl:size-4 text-destructive" />
+            </Button>
+          </Tip>
         ) : null}
         <DataViewOptions className="flex-none" />
       </div>

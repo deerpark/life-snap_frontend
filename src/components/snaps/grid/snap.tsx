@@ -61,8 +61,8 @@ export function SnapItem({ snap }: SnapItemProps) {
   > = React.useCallback(
     (e) => {
       e.stopPropagation()
-      useRootStore.setState(() => ({
-        snap,
+      useRootStore.setState(({ snap: origin }) => ({
+        snap: origin?.snap_id === snap.snap_id ? null : snap,
       }))
     },
     [snap]
@@ -80,7 +80,7 @@ export function SnapItem({ snap }: SnapItemProps) {
       <Card
         className={cn(
           "group relative rounded-2xl overflow-hidden shadow-none hover:scale-105 hover:shadow transition-all",
-          isViewing ? "ring ring-primary border-primary/80" : ""
+          isViewing ? "ring ring-primary border-primary" : ""
         )}>
         <Image
           src={imageSrc}

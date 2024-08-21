@@ -81,6 +81,7 @@ export interface GetSnapsParams {
 export type SnapsSuccessData = {
   seed: number | string | null
   snaps: Snap[]
+  hasMore: boolean
 }
 export type SnapFilterOptionsSuccessData = SnapFilterOptions
 export interface RootResponse {

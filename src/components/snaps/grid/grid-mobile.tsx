@@ -13,6 +13,8 @@ import {
 import { ScrollArea } from "@src/components/ui/scroll-area"
 import useRootStore from "@src/stores/root.store"
 
+import { InfiniteLoad } from "../infinite-load"
+import { ImageViewer } from "./image-viewer"
 import { SnapItem } from "./snap"
 import { SnapInfo } from "./snap-info"
 
@@ -24,15 +26,23 @@ export function GridMobile() {
       computedSnaps: computedSnaps(),
     })
   )
+
   return (
     <>
       <ScrollArea className="flex-1">
-        <Masonry columnsCount={1} gutter="16px" className="mb-4 p-5">
-          {computedSnaps.map((snap) => (
-            <SnapItem key={snap.snap_id} snap={snap} />
-          ))}
-        </Masonry>
+        {computedSnaps.length ? (
+          <Masonry
+            columnsCount={1}
+            gutter="16px"
+            className="mb-4 p-5 min-h-screen">
+            {computedSnaps.map((snap) => (
+              <SnapItem key={snap.snap_id} snap={snap} />
+            ))}
+          </Masonry>
+        ) : null}
+        <InfiniteLoad isEmpty={!computedSnaps.length} />
       </ScrollArea>
+      <ImageViewer />
       <Drawer open={!!snap} onOpenChange={toggleSnapDrawer}>
         <DrawerContent>
           <DrawerHeader className="text-left pb-0">

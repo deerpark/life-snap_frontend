@@ -24,7 +24,7 @@ export const fetchSnaps = async (params: GetSnapsParams) => {
   } catch (error) {
     toast(`${error}`)
   }
-  return { snaps, seed }
+  return { snaps, seed, hasMore: data.hasMore }
 }
 
 export const useFetchSnaps = (params: GetSnapsParams) => {

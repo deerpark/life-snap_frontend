@@ -202,9 +202,9 @@ export const columns: ColumnDef<Snap>[] = [
         <div className="flex items-center gap-x-2 gap-y-1 flex-wrap">
           {(row.getValue("option_values") as string | undefined)
             ?.split(",")
-            .map((val) => (
+            .map((val, i) => (
               <span
-                key={val}
+                key={`${val}-${i}`}
                 className="border rounded-[4px] px-1 text-sm bg-muted">
                 {val}
               </span>
