@@ -1,4 +1,4 @@
-import useRootStore from "@src/stores/root.store"
+import useLocalStore from "@src/stores/local.store"
 
 import { Separator } from "../ui/separator"
 import { Account } from "./account"
@@ -6,7 +6,7 @@ import { ModeToggle } from "./mode-toggle"
 import { ViewToggle } from "./view-toggle"
 
 export function Settings() {
-  const { isSettingsOpen } = useRootStore(({ isSettingsOpen }) => ({
+  const { isSettingsOpen } = useLocalStore(({ isSettingsOpen }) => ({
     isSettingsOpen,
   }))
   return isSettingsOpen ? (

@@ -8,7 +8,7 @@ import {
 } from "lucide-react"
 
 import { cn } from "@src/lib/utils"
-import useRootStore from "@src/stores/root.store"
+import useLocalStore from "@src/stores/local.store"
 
 import { Button } from "../ui/button"
 import { Tip } from "../ui/tooltip"
@@ -18,12 +18,12 @@ interface ToggleSettingsProps {
 }
 
 export function ToggleSettings({ className }: ToggleSettingsProps) {
-  const { isSettingsOpen } = useRootStore(({ isSettingsOpen }) => ({
+  const { isSettingsOpen } = useLocalStore(({ isSettingsOpen }) => ({
     isSettingsOpen,
   }))
 
   const handleToggleSettings = useCallback(() => {
-    useRootStore.setState(() => ({
+    useLocalStore.setState(() => ({
       isSettingsOpen: !isSettingsOpen,
     }))
   }, [isSettingsOpen])

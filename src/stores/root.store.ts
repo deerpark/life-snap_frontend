@@ -7,7 +7,6 @@ import { Snap } from "@src/type/snap.schema"
 import useSessionStore from "./session.store"
 
 type RootState = {
-  isSettingsOpen: boolean
   snaps: Snap[]
   setSnaps: (snaps: Snap[]) => void
   snap: Snap | null
@@ -20,7 +19,6 @@ type RootState = {
 }
 
 const useRootStore = create<RootState>((set, get) => ({
-  isSettingsOpen: true,
   snaps: [],
   setSnaps: (snaps) => set({ snaps }),
   snap: null,

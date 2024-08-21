@@ -9,6 +9,7 @@ import { createJSONStorage, persist } from "zustand/middleware"
 import { SnapFilterFacetedOptions, Theme, ViewType } from "@src/type"
 
 type ThemeState = {
+  isSettingsOpen: boolean
   theme: Theme
   viewType: ViewType
   columnsCountBreakPoints?: Record<number, number>
@@ -25,6 +26,7 @@ type ThemeState = {
 const useLocalStore = create<ThemeState>()(
   persist(
     (set) => ({
+      isSettingsOpen: true,
       theme: "light",
       viewType: "/snaps/grid",
       columnsCountBreakPoints: {
@@ -67,7 +69,7 @@ const useLocalStore = create<ThemeState>()(
     {
       name: "life-snap-storage",
       storage: createJSONStorage(() => localStorage),
-      version: 0,
+      version: 1,
     }
   )
 )
