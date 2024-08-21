@@ -11,6 +11,7 @@ import {
 import { ScrollArea } from "@src/components/ui/scroll-area"
 import useLocalStore from "@src/stores/local.store"
 import useRootStore from "@src/stores/root.store"
+import useSessionStore from "@src/stores/session.store"
 
 import { InfiniteLoad } from "../infinite-load"
 import { ImageViewer } from "./image-viewer"
@@ -25,9 +26,14 @@ export function GridDesktop() {
   const { columnsCountBreakPoints } = useLocalStore(
     ({ columnsCountBreakPoints }) => ({ columnsCountBreakPoints })
   )
+  const { columnFilters } = useSessionStore(({ columnFilters }) => ({
+    columnFilters,
+  }))
   const handleCloseSnapInfo = React.useCallback(() => {
     useRootStore.setState(() => ({ snap: null }))
   }, [])
+
+  React.useEffect(() => {}, [columnFilters])
 
   return (
     <>

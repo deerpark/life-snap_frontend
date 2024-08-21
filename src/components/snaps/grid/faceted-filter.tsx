@@ -101,8 +101,8 @@ export function DataGridFacetedFilter({
                       <Badge
                         variant="secondary"
                         key={option.value}
-                        className="rounded-sm px-1 font-normal">
-                        {option.label}
+                        className="rounded-sm px-1 font-normal max-w-28">
+                        <span className="block truncate">{option.label}</span>
                       </Badge>
                     ))
                 )}
@@ -180,7 +180,7 @@ export function DataGridFacetedFilter({
                         {option.icon && (
                           <option.icon className="mr-2 size-4 text-muted-foreground" />
                         )}
-                        <span>{option.label}</span>
+                        <span className="line-clamp-1">{option.label}</span>
                         {!!facets?.get(value) && (
                           <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
                             {`${facets.get(value)}`}

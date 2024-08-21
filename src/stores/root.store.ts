@@ -28,28 +28,27 @@ const useRootStore = create<RootState>((set, get) => ({
   imageViwerSrc: null,
   computedSnaps() {
     const { snaps } = get()
-    const { filter, columnFilters } = useSessionStore.getState()
-    return /* mockSnaps || */ snaps
-      .filter((snap) =>
-        columnFilters
-          .filter((filter) => filter.value)
-          .every((filter) => {
-            const snapKey = filter.id as keyof Snap
-            const values =
-              snapKey === "birth_year"
-                ? (filter.value as number[]).map((v) => YEAR - v)
-                : filter.value
-            return (values as unknown[])?.includes(snap[snapKey])
-          })
-      )
-      .filter(
+    const { columnFilters } = useSessionStore.getState()
+    return /* mockSnaps || */ snaps.filter((snap) =>
+      columnFilters
+        .filter((filter) => filter.value)
+        .every((filter) => {
+          const snapKey = filter.id as keyof Snap
+          const values =
+            snapKey === "birth_year"
+              ? (filter.value as number[]).map((v) => YEAR - v)
+              : filter.value
+          return (values as unknown[])?.includes(snap[snapKey])
+        })
+    )
+    /* .filter(
         (snap) =>
           snap.tpo?.includes(filter) ||
           snap.grade?.includes(filter) ||
           snap.job?.includes(filter) ||
           snap.city?.includes(filter) ||
           snap.option_values?.includes(filter)
-      )
+      ) */
   },
   getFacetedData(groupBy) {
     const { snaps } = get()
