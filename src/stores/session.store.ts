@@ -55,6 +55,8 @@ const useSessionStore = create<SessionState>()(
               ...get().params,
               start_date,
               end_date,
+              page: 1,
+              page_size: PAGE_SIZE[1],
             },
             date,
           }))

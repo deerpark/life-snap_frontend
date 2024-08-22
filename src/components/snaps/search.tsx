@@ -3,6 +3,7 @@ import { useSessionStore } from "@store"
 import { debounce } from "lodash"
 import { Search } from "lucide-react"
 
+import { PAGE_SIZE } from "@lib/constants"
 import { KEY } from "@lib/enum"
 import { Input } from "@components/ui"
 
@@ -17,6 +18,8 @@ export function SnapSearch() {
           params: {
             ...state.params,
             text,
+            page: 1,
+            page_size: PAGE_SIZE[1],
           },
         }))
         sessionStorage.setItem(KEY.SEED, "null")

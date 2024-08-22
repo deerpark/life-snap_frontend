@@ -5,7 +5,7 @@ import { useSessionStore } from "@store"
 import { ColumnFilter } from "@tanstack/react-table"
 import { Check, ChevronDown, ChevronUp, CirclePlus } from "lucide-react"
 
-import { PROPERTY_LABEL } from "@lib/constants"
+import { PAGE_SIZE, PROPERTY_LABEL } from "@lib/constants"
 import { KEY } from "@lib/enum"
 import { cn } from "@lib/utils"
 import {
@@ -171,6 +171,7 @@ export function DataCondition({
                         params: {
                           ...params,
                           page: 1,
+                          page_size: PAGE_SIZE[1],
                           [column]: undefined,
                         },
                       }))
