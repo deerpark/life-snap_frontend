@@ -1,3 +1,4 @@
+import { GetSnapsParams } from "@interface"
 import {
   ColumnFiltersState,
   OnChangeFn,
@@ -8,13 +9,13 @@ import { DateRange, SelectRangeEventHandler } from "react-day-picker"
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
 
-import { DATE_FORMAT, PAGE_SIZE } from "@src/lib/constants"
-import { KEY } from "@src/lib/enum"
-import { dateFormat } from "@src/lib/utils"
-import { GetSnapsParams } from "@src/type"
+import { DATE_FORMAT, PAGE_SIZE } from "@lib/constants"
+import { KEY } from "@lib/enum"
+import { dateFormat } from "@lib/utils"
 
 type SessionState = {
   params: GetSnapsParams
+  setPage: (page: number) => void
   date: DateRange
   setDate: SelectRangeEventHandler
   filter: string
@@ -31,6 +32,14 @@ const useSessionStore = create<SessionState>()(
       params: {
         page: 1,
         page_size: PAGE_SIZE[1],
+      },
+      setPage: (page: number) => {
+        set(() => ({
+          params: {
+            ...get().params,
+            page,
+          },
+        }))
       },
       date: {
         from: undefined,
@@ -66,7 +75,7 @@ const useSessionStore = create<SessionState>()(
       sorting: [
         {
           id: "image_date",
-          desc: false,
+          desc: true,
         },
       ],
       setSorting: (updater) =>

@@ -1,15 +1,16 @@
+import {
+  SnapFilterOptions,
+  snapFilterOptionSchema,
+  SnapFilterOptionsSuccessData,
+} from "@interface"
+import { API, API_ENDPOINTS } from "@remote"
 import { useQuery } from "react-query"
 import { toast } from "sonner"
-
-import { SnapFilterOptionsSuccessData } from "@type/remote.type"
-import { SnapFilterOptions, snapFilterOptionSchema } from "@type/snap.schema"
-import axiosInstance from "@api/axios-instance"
-import { API_ENDPOINTS } from "@api/endpoints"
 
 export const fetchSnapFilterOptionsKey = "snap-filter-options"
 
 export const fetchSnapFilterOptions = async () => {
-  const { data } = await axiosInstance.get<SnapFilterOptionsSuccessData>(
+  const { data } = await API.get<SnapFilterOptionsSuccessData>(
     API_ENDPOINTS.FILTER
   )
   let snapFilterOptions: SnapFilterOptions = {

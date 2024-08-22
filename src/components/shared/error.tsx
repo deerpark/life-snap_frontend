@@ -1,6 +1,6 @@
 import { isRouteErrorResponse, useRouteError } from "react-router-dom"
 
-export default function ErrorBoundary() {
+export function ErrorBoundary() {
   const error = useRouteError()
 
   // 오류 객체가 ErrorResponse인지 검사

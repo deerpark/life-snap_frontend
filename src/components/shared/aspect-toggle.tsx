@@ -1,10 +1,7 @@
 import * as React from "react"
 
 import useLocalStore from "@stores/local.store"
-import { Tip } from "@components/ui/tooltip"
-
-import { Label } from "../ui/label"
-import { Switch } from "../ui/switch"
+import { Label, Switch, Tip } from "@components/ui"
 
 export const AspectToggle: React.FC = () => {
   const { isFixedAspect, setFixedAspect } = useLocalStore(

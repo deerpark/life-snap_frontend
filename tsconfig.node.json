@@ -15,7 +15,14 @@
       "@hooks/*": ["src/hooks/*"],
       "@api/*": ["src/api/*"],
       "@type/*": ["src/type/*"],
-      "@lib/*": ["src/lib/*"]
+      "@lib/*": ["src/lib/*"],
+      "@mock/*": ["src/mock/*"],
+      "@assets/*": ["src/assets/*"],
+      "@store": ["src/stores"],
+      "@remote": ["src/api"],
+      "@hook": ["src/hooks"],
+      "@interface": ["src/type"],
+      "@env": ["src/env"]
     },
     "types": ["node", "vite/client", "vitest/globals", "vitest"]
   },

@@ -1,3 +1,4 @@
+import { useLocalStore, useSessionStore } from "@store"
 import { rankItem } from "@tanstack/match-sorter-utils"
 import {
   ColumnDef,
@@ -10,9 +11,6 @@ import {
   TableState,
   useReactTable,
 } from "@tanstack/react-table"
-
-import useLocalStore from "@stores/local.store"
-import useSessionStore from "@stores/session.store"
 
 interface useTableProps<TData, TValue> {
   data: TData[]

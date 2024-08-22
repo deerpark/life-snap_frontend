@@ -1,5 +1,6 @@
-import { cn } from "@lib/utils"
 import { Shell } from "lucide-react"
+
+import { cn } from "@lib/utils"
 
 /**
  * 페이지 로딩 인디케이터 컨테이너
@@ -17,7 +18,13 @@ export function Spinner({
   )
   return (
     <div className={classNames}>
-      <Shell className="animate-spin" width={size} height={size} />
+      <span className="animate-spin">
+        <Shell
+          width={size}
+          height={size}
+          style={{ transform: "rotateY(180deg)" }}
+        />
+      </span>
     </div>
   )
 }

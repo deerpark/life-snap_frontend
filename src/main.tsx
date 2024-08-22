@@ -5,8 +5,8 @@ import App from "./app"
 
 import "./styles/globals.css"
 
-import { Toaster } from "@components/ui/sonner"
-import { TailwindIndicator } from "@components/shared/tailwind-indicator"
+import { TailwindIndicator } from "@components/shared"
+import { Toaster } from "@components/ui"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

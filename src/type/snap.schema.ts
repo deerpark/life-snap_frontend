@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-import { GRADE } from "@src/lib/enum"
+import { GRADE } from "@lib/enum"
 
 // We're keeping a simple non-relational schema here.
 // IRL, you will have a schema for your data models.

@@ -1,9 +1,8 @@
 import * as React from "react"
+import { useFetchSnapFilterOptions } from "@hook"
+import { useLocalStore } from "@store"
 import { Shell } from "lucide-react"
 import { Outlet } from "react-router-dom"
-
-import { useFetchSnapFilterOptions } from "@src/hooks"
-import useLocalStore from "@src/stores/local.store"
 
 export default function SnapsPage() {
   const {
@@ -37,7 +36,9 @@ export default function SnapsPage() {
   if (isLoading)
     return (
       <div className="flex-1 flex items-center justify-center">
-        <Shell size={24} className="animate-spin" />
+        <span className="animate-spin">
+          <Shell size={24} style={{ transform: "rotateY(180deg)" }} />
+        </span>
       </div>
     )
 

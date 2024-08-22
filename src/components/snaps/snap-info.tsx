@@ -1,19 +1,12 @@
 import * as React from "react"
+import { useLocalStore, useRootStore } from "@store"
 import { parse } from "date-fns"
 
-import { ScrollArea } from "@src/components/ui/scroll-area"
-import { Separator } from "@src/components/ui/separator"
-import { env } from "@src/env"
-import {
-  DATE_FORMAT,
-  GRADE_COLOR,
-  PROPERTY_LABEL,
-  YEAR,
-} from "@src/lib/constants"
-import { cn, dateFormat } from "@src/lib/utils"
-import useLocalStore from "@src/stores/local.store"
-import useRootStore from "@src/stores/root.store"
-import { Image } from "@components/snaps/image"
+import { env } from "@env"
+import { DATE_FORMAT, GRADE_COLOR, PROPERTY_LABEL, YEAR } from "@lib/constants"
+import { cn, dateFormat } from "@lib/utils"
+import { Image } from "@components/snaps"
+import { ScrollArea, Separator } from "@components/ui"
 
 interface SnapInfoProps {
   header?: boolean

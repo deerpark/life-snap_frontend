@@ -1,23 +1,18 @@
 import * as React from "react"
+import { RootResponse } from "@interface"
+import { API } from "@remote"
 import { Aperture } from "lucide-react"
 import { Link, Outlet, useLocation, useRouteLoaderData } from "react-router-dom"
 import { useSearchParam } from "react-use"
 
-import { RootResponse } from "@src/type"
-import axiosInstance from "@api/axios-instance"
 import { TITLE } from "@lib/constants"
 import { PAGENAMES } from "@lib/enum"
 import { cn, sendToAnalyticsPageView, setOnceAnalyticsUserId } from "@lib/utils"
-import { buttonVariants } from "@components/ui/button"
-import { Separator } from "@components/ui/separator"
-import { Tip } from "@components/ui/tooltip"
-import { SnapSearch } from "@components/snaps/search"
+import { Settings, ToggleButton } from "@components/shared"
+import { DatePickerWithRange, SnapSearch } from "@components/snaps"
+import { buttonVariants, Separator, Tip } from "@components/ui"
 
-import { DatePickerWithRange } from "../snaps/date-range-picker"
-import { Settings } from "./settings"
-import { ToggleButton } from "./toggle"
-
-export default function Layout() {
+export function Layout() {
   const token = useSearchParam("token")
   const location = useLocation()
   const { data } = useRouteLoaderData("root") as RootResponse
@@ -30,7 +25,7 @@ export default function Layout() {
 
   React.useEffect(() => {
     if (token) {
-      axiosInstance.setAccessToken(token)
+      API.setAccessToken(token)
       window.location.href = `${PAGENAMES.HOME}`
     }
   }, [token])

@@ -1,20 +1,23 @@
 import * as React from "react"
+import { useSessionStore } from "@store"
 import { differenceInDays } from "date-fns"
 import { ko } from "date-fns/locale"
 import { Calendar as CalendarIcon, ChevronDown, ChevronUp } from "lucide-react"
 import { DateRange } from "react-day-picker"
 
-import { DATE_FORMAT, DAY_NAME } from "@src/lib/constants"
-import useSessionStore from "@src/stores/session.store"
+import { DATE_FORMAT, DAY_NAME } from "@lib/constants"
 import { cn, dateFormat } from "@lib/utils"
-import { Button } from "@components/ui/button"
-import { Calendar } from "@components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@components/ui/popover"
+import { CalendarTemplate } from "@components/snaps"
+import {
+  Button,
+  Calendar,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Separator,
+} from "@components/ui"
 
-import { Separator } from "../ui/separator"
-import { CalendarTemplate } from "./calendar-template"
-
-function getDateFormat(date: DateRange) {
+function getDateRangeFormat(date: DateRange) {
   if (!date?.from || !date.to) return ["", ""]
   const to = new Date(date.to)
   const from = new Date(date.from)
@@ -43,7 +46,7 @@ export function DatePickerWithRange({
   const [selectedRange, setSelectedRange] = React.useState<
     DateRange | undefined
   >(date)
-  const [startFormattedDate, endFormattedDate] = getDateFormat(date)
+  const [startFormattedDate, endFormattedDate] = getDateRangeFormat(date)
 
   const templateValue = React.useMemo(() => {
     if (!selectedRange?.from || !selectedRange?.to) return "whole"

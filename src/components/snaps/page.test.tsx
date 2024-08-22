@@ -5,8 +5,7 @@ import "@testing-library/jest-dom"
 import { render, screen, waitFor } from "@testing-library/react"
 
 import API from "@api/axios-instance"
-
-import Dashboard from "./"
+import Dashboard from "@components/snaps/page"
 
 vi.mock("@api/axios-instance", async (importOriginal) => {
   const actual = (await importOriginal()) as typeof API

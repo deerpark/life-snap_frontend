@@ -1,26 +1,25 @@
 import * as React from "react"
-import { useLocalStore, useRootStore, useSessionStore } from "@store"
+import { Snap } from "@interface"
+import { useRootStore, useSessionStore } from "@store"
 import { X } from "lucide-react"
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 
-import { ImageViewer, InfiniteLoad, SnapInfo } from "@components/snaps"
-import { SnapItem } from "@components/snaps/grid"
+import { columns, ImageViewer, SnapInfo } from "@components/snaps"
+import { DataTable } from "@components/snaps/list"
 import {
   Button,
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-  ScrollArea,
 } from "@components/ui"
 
-export function GridDesktop() {
-  const { snap, computedSnaps } = useRootStore(({ snap, computedSnaps }) => ({
+interface ListDesktopProps {
+  data: Snap[]
+}
+
+export function ListDesktop({ data }: ListDesktopProps) {
+  const { snap } = useRootStore(({ snap }) => ({
     snap,
-    computedSnaps: computedSnaps(),
   }))
-  const { columnsCountBreakPoints } = useLocalStore(
-    ({ columnsCountBreakPoints }) => ({ columnsCountBreakPoints })
-  )
   const { columnFilters } = useSessionStore(({ columnFilters }) => ({
     columnFilters,
   }))
@@ -41,19 +40,7 @@ export function GridDesktop() {
           minSize={50}
           defaultSize={snap ? 80 : 100}
           className="flex flex-col">
-          <ScrollArea id="snaps-masonry" className="flex-1">
-            {computedSnaps.length ? (
-              <ResponsiveMasonry
-                columnsCountBreakPoints={columnsCountBreakPoints}>
-                <Masonry gutter="16px" className="mb-4 p-5 min-h-screen">
-                  {computedSnaps.map((snap) => (
-                    <SnapItem key={snap.snap_id} snap={snap} />
-                  ))}
-                </Masonry>
-              </ResponsiveMasonry>
-            ) : null}
-            <InfiniteLoad isEmpty={!computedSnaps.length} />
-          </ScrollArea>
+          <DataTable snaps={data || []} columns={columns} />
         </ResizablePanel>
         {snap ? (
           <>

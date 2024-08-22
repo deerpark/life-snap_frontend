@@ -1,4 +1,5 @@
 import * as React from "react"
+import { API } from "@remote"
 import {
   AtSign,
   ChevronDown,
@@ -8,10 +9,9 @@ import {
   Users,
 } from "lucide-react"
 
-import API from "@src/api/axios-instance"
-import { cn } from "@src/lib/utils"
-import { Button } from "@components/ui/button"
+import { cn } from "@lib/utils"
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -19,7 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@components/ui/dropdown-menu"
+} from "@components/ui"
 
 const user = API.userInfo
 

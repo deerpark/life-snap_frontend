@@ -1,21 +1,15 @@
+import { GetSnapsParams, Snap, snapSchema, SnapsSuccessData } from "@interface"
+import { API, API_ENDPOINTS } from "@remote"
 import { useQuery } from "react-query"
 import { toast } from "sonner"
 import { z } from "zod"
 
-import { GetSnapsParams, SnapsSuccessData } from "@type/remote.type"
-import { Snap, snapSchema } from "@type/snap.schema"
-import axiosInstance from "@api/axios-instance"
-import { API_ENDPOINTS } from "@api/endpoints"
-
 export const fetchSnapsKey = "snaps"
 
 export const fetchSnaps = async (params: GetSnapsParams) => {
-  const { data } = await axiosInstance.get<SnapsSuccessData>(
-    API_ENDPOINTS.SNAPS,
-    {
-      params,
-    }
-  )
+  const { data } = await API.get<SnapsSuccessData>(API_ENDPOINTS.SNAPS, {
+    params,
+  })
   let snaps: Snap[] = []
   let seed: number | string | null = null
   try {

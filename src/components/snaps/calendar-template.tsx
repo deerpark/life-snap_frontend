@@ -2,7 +2,7 @@ import * as React from "react"
 import { subDays } from "date-fns"
 import { DateRange } from "react-day-picker"
 
-import { ToggleGroup, ToggleGroupItem } from "@components/ui/toggle-group"
+import { ToggleGroup, ToggleGroupItem } from "@components/ui"
 
 interface CalendarTemplateProps {
   value: string

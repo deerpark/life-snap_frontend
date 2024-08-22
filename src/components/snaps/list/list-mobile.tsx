@@ -1,9 +1,9 @@
 import * as React from "react"
+import { Snap } from "@interface"
 import { useRootStore, useSessionStore } from "@store"
-import Masonry from "react-responsive-masonry"
 
-import { ImageViewer, InfiniteLoad, SnapInfo } from "@components/snaps"
-import { SnapItem } from "@components/snaps/grid"
+import { columns, ImageViewer, SnapInfo } from "@components/snaps"
+import { DataTable } from "@components/snaps/list"
 import {
   Button,
   Drawer,
@@ -16,12 +16,15 @@ import {
   ScrollArea,
 } from "@components/ui"
 
-export function GridMobile() {
-  const { snap, toggleSnapDrawer, computedSnaps } = useRootStore(
-    ({ snap, toggleSnapDrawer, computedSnaps }) => ({
+interface ListMobileProps {
+  data: Snap[]
+}
+
+export function ListMobile({ data }: ListMobileProps) {
+  const { snap, toggleSnapDrawer } = useRootStore(
+    ({ snap, toggleSnapDrawer }) => ({
       snap,
       toggleSnapDrawer,
-      computedSnaps: computedSnaps(),
     })
   )
   const { columnFilters } = useSessionStore(({ columnFilters }) => ({
@@ -32,19 +35,7 @@ export function GridMobile() {
 
   return (
     <>
-      <ScrollArea className="flex-1">
-        {computedSnaps.length ? (
-          <Masonry
-            columnsCount={1}
-            gutter="16px"
-            className="mb-4 p-5 min-h-screen">
-            {computedSnaps.map((snap) => (
-              <SnapItem key={snap.snap_id} snap={snap} />
-            ))}
-          </Masonry>
-        ) : null}
-        <InfiniteLoad isEmpty={!computedSnaps.length} />
-      </ScrollArea>
+      <DataTable snaps={data || []} columns={columns} />
       <ImageViewer />
       <Drawer open={!!snap} onOpenChange={toggleSnapDrawer}>
         <DrawerContent className="">

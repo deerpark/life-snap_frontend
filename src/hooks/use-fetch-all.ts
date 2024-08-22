@@ -1,12 +1,11 @@
-import { useQueries } from "react-query"
-
-import useSessionStore from "@stores/session.store"
-import { fetchSnaps, fetchSnapsKey } from "@hooks/use-fetch-snaps"
-
 import {
   fetchSnapFilterOptions,
   fetchSnapFilterOptionsKey,
-} from "./use-fetch-snap-filter-options"
+  fetchSnaps,
+  fetchSnapsKey,
+} from "@hook"
+import { useSessionStore } from "@store"
+import { useQueries } from "react-query"
 
 export const useFetchAll = () => {
   const { params } = useSessionStore(({ params }) => ({ params }))

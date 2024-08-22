@@ -1,4 +1,6 @@
-import { useCallback } from "react"
+import * as React from "react"
+import { Toggle } from "@interface"
+import { useLocalStore } from "@store"
 import {
   ChevronDown,
   ChevronLeft,
@@ -9,13 +11,9 @@ import {
   Settings2,
 } from "lucide-react"
 
-import { TOGGLE_LABEL } from "@src/lib/constants"
-import { cn } from "@src/lib/utils"
-import useLocalStore from "@src/stores/local.store"
-import { Toggle } from "@src/type"
-
-import { Button } from "../ui/button"
-import { Tip } from "../ui/tooltip"
+import { TOGGLE_LABEL } from "@lib/constants"
+import { cn } from "@lib/utils"
+import { Button, Tip } from "@components/ui"
 
 interface ToggleButtonProps {
   className?: string
@@ -25,7 +23,7 @@ interface ToggleButtonProps {
 
 const toggleIcon: Record<keyof Toggle, React.ReactNode> = {
   settings: <Settings2 size={20} strokeWidth={2.5} />,
-  filter: <CircleFadingPlus size={20} strokeWidth={2.5} />,
+  condition: <CircleFadingPlus size={20} strokeWidth={2.5} />,
   facetedFilter: <FilterIcon size={20} strokeWidth={2.5} />,
 }
 
@@ -36,7 +34,7 @@ export function ToggleButton({
 }: ToggleButtonProps) {
   const isToggle = useLocalStore(({ toggle }) => toggle[toggleKey])
 
-  const handleToggleSettings = useCallback(() => {
+  const handleToggleSettings = React.useCallback(() => {
     useLocalStore.setState(({ toggle }) => ({
       toggle: {
         ...toggle,
@@ -55,6 +53,7 @@ export function ToggleButton({
         variant="ghost"
         className={cn(
           "flex-none flex items-center gap-x-3 text-muted-foreground text-base",
+          isToggle ? "bg-accent" : "",
           className
         )}
         onClick={handleToggleSettings}>

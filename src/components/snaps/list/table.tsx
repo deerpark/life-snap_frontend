@@ -1,18 +1,21 @@
+import * as React from "react"
+import { Snap } from "@interface"
+import { useRootStore } from "@store"
 import { ColumnDef, flexRender } from "@tanstack/react-table"
 import { ChartNoAxesGantt } from "lucide-react"
 
-import { DataTablePagination } from "@src/components/snaps/list/pagination"
 import { cn } from "@lib/utils"
 import { useTable } from "@hooks/use-table"
-import { ScrollArea } from "@components/ui/scroll-area"
+import { DataTablePagination } from "@components/snaps/list"
 import {
+  ScrollArea,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "@components/ui/table"
+} from "@components/ui"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -27,6 +30,14 @@ export function DataTable<TData, TValue>({
     data: snaps,
     columns,
   })
+
+  const handleViewSnapInfo = React.useCallback((row?: Snap) => {
+    if (!row) return
+    console.log(row)
+    useRootStore.setState(({ snap: origin }) => ({
+      snap: origin?.snap_id === row.snap_id ? null : row,
+    }))
+  }, [])
 
   return (
     <>
@@ -69,7 +80,8 @@ export function DataTable<TData, TValue>({
                 table.getRowModel().rows.map((row) => (
                   <TableRow
                     key={row.id}
-                    data-state={row.getIsSelected() && "selected"}>
+                    data-state={row.getIsSelected() && "selected"}
+                    onClick={() => handleViewSnapInfo(row.original as Snap)}>
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
                         {flexRender(
@@ -100,7 +112,7 @@ export function DataTable<TData, TValue>({
           </Table>
         </ScrollArea>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination />
     </>
   )
 }

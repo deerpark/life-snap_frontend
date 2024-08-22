@@ -1,10 +1,10 @@
 import * as React from "react"
+import { useSessionStore } from "@store"
 import { debounce } from "lodash"
 import { Search } from "lucide-react"
 
-import { KEY } from "@src/lib/enum"
-import useSessionStore from "@src/stores/session.store"
-import { Input } from "@components/ui/input"
+import { KEY } from "@lib/enum"
+import { Input } from "@components/ui"
 
 export function SnapSearch() {
   const { params } = useSessionStore(({ params }) => ({ params }))

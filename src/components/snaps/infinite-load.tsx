@@ -1,10 +1,8 @@
+import { useInfiniteScroll } from "@hook"
 import { Bomb, BoxSelect, CheckCheck, Ellipsis } from "lucide-react"
 
-import { useInfiniteScroll } from "@src/hooks/use-infinite-scroll"
-import { cn } from "@src/lib/utils"
-
-import Empty from "../shared/empty"
-import { Spinner } from "../shared/spinner"
+import { cn } from "@lib/utils"
+import { Empty, Spinner } from "@components/shared"
 
 interface InfiniteLoadProps {
   isEmpty?: boolean
@@ -44,7 +42,7 @@ export function InfiniteLoad({ isEmpty }: InfiniteLoadProps) {
     return (
       <div
         ref={observerRef}
-        className="min-h-40 flex flex-col justify-center items-center text-muted-foreground bg-gradient-to-b from-background via-75% via-background to-muted">
+        className="animate-pulse min-h-40 flex flex-col justify-center items-center text-muted-foreground bg-gradient-to-b from-background via-75% via-background to-muted">
         <Ellipsis size={32} />
       </div>
     )

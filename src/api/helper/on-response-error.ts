@@ -1,8 +1,8 @@
+import { ErrorResponse } from "@interface"
 import { AxiosResponse } from "axios"
 import { get } from "lodash"
 import { toast } from "sonner"
 
-import { ErrorResponse } from "@type/remote.type"
 import { ERROR_CODE, ERROR_MESSAGE, PAGENAMES } from "@lib/enum"
 import { routeBackToLogin } from "@lib/utils"
 

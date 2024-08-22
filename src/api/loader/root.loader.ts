@@ -1,6 +1,5 @@
+import { API } from "@remote"
 import { /* ActionFunctionArgs, */ defer } from "react-router-dom"
-
-import API from "@api/axios-instance"
 
 const user = API.userInfo
 

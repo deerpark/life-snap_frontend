@@ -1,12 +1,10 @@
 import * as React from "react"
+import { ViewType } from "@interface"
+import { useLocalStore } from "@store"
 import { Kanban, ListMinus } from "lucide-react"
 import { useLocation, useNavigate } from "react-router-dom"
 
-import useLocalStore from "@src/stores/local.store"
-import { ViewType } from "@src/type"
-import { Separator } from "@components/ui/separator"
-import { Tabs, TabsList, TabsTrigger } from "@components/ui/tabs"
-import { Tip } from "@components/ui/tooltip"
+import { Separator, Tabs, TabsList, TabsTrigger, Tip } from "@components/ui"
 
 export const ViewToggle: React.FC = () => {
   const { pathname } = useLocation()

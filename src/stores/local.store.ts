@@ -1,3 +1,4 @@
+import { SnapFilterFacetedOptions, Theme, Toggle, ViewType } from "@interface"
 import {
   OnChangeFn,
   PaginationState,
@@ -5,8 +6,6 @@ import {
 } from "@tanstack/react-table"
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
-
-import { SnapFilterFacetedOptions, Theme, Toggle, ViewType } from "@src/type"
 
 type ThemeState = {
   toggle: Toggle
@@ -30,7 +29,7 @@ const useLocalStore = create<ThemeState>()(
     (set) => ({
       toggle: {
         settings: false,
-        filter: true,
+        condition: true,
         facetedFilter: false,
       },
       theme: "light",

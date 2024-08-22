@@ -1,8 +1,7 @@
+import { Snap, SnapFilterOptions } from "@interface"
 import { AxiosResponse } from "axios"
 
 import { GRADE, IS_ADMIN, USER_ROLE } from "@lib/enum"
-
-import { Snap, SnapFilterOptions } from "./snap.schema"
 
 export type ResponseCode = "200" | "400" | "500"
 

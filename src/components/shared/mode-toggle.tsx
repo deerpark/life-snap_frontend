@@ -1,10 +1,8 @@
 import * as React from "react"
+import { useLocalStore } from "@store"
 import { Moon, Sun } from "lucide-react"
 
-import useLocalStore from "@stores/local.store"
-import { Separator } from "@components/ui/separator"
-import { Tabs, TabsList, TabsTrigger } from "@components/ui/tabs"
-import { Tip } from "@components/ui/tooltip"
+import { Separator, Tabs, TabsList, TabsTrigger, Tip } from "@components/ui"
 
 export const ModeToggle: React.FC = () => {
   const { theme, setTheme } = useLocalStore(({ theme, setTheme }) => ({

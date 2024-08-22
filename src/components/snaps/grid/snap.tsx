@@ -1,18 +1,14 @@
 import * as React from "react"
+import { Snap } from "@interface"
+import { useLocalStore, useRootStore } from "@store"
 import { format, parse } from "date-fns"
 import { Aperture, Download, Fullscreen, Shell, TextSelect } from "lucide-react"
 
-import { env } from "@src/env"
-import useLocalStore from "@src/stores/local.store"
-import useRootStore from "@src/stores/root.store"
-import { Snap } from "@src/type"
+import { env } from "@env"
 import { DATE_FORMAT, GRADE_COLOR, YEAR } from "@lib/constants"
 import { cn } from "@lib/utils"
-import { Button } from "@components/ui/button"
-import { Card } from "@components/ui/card"
-import { Separator } from "@components/ui/separator"
-import { Tip } from "@components/ui/tooltip"
-import { Image } from "@components/snaps/image"
+import { Image } from "@components/snaps"
+import { Button, Card, Separator, Tip } from "@components/ui"
 
 interface SnapItemProps {
   snap: Snap
@@ -90,10 +86,9 @@ export function SnapItem({ snap }: SnapItemProps) {
           className={cn(isFixedAspect ? "aspect-video" : "")}
           src={imageSrc}
           loadingIcon={
-            <Shell
-              className="animate-spin text-muted-foreground/50"
-              size={24}
-            />
+            <span className="animate-spin text-muted-foreground/50">
+              <Shell size={24} style={{ transform: "rotateY(180deg)" }} />
+            </span>
           }
           fallbackIcon={
             <Aperture className="text-muted-foreground/50" size={24} />
@@ -101,10 +96,17 @@ export function SnapItem({ snap }: SnapItemProps) {
           alt={snap.tpo}
         />
         <div
-          className="opacity-0 group-hover:opacity-100 transition-all bg-black/40 absolute inset-0 flex flex-col gap-y-4 p-4"
+          className={cn(
+            "opacity-0 group-hover:opacity-100 transition-all bg-black/40 absolute inset-0 flex flex-col",
+            snapInfo ? "gap-y-2 p-2" : "gap-y-4 p-4"
+          )}
           onClick={handleViewSnapInfo}>
           <div className="flex-1 flex items-center justify-center">
-            <span className="text-white/70 text-lg font-semibold cursor-default">
+            <span
+              className={cn(
+                "text-white/70 font-semibold cursor-default",
+                snapInfo ? "text-base" : "text-lg"
+              )}>
               자세히 보기
             </span>
           </div>
@@ -113,35 +115,50 @@ export function SnapItem({ snap }: SnapItemProps) {
               <Button
                 variant="secondary"
                 size="icon"
+                className={snapInfo ? "flex-1 h-7 rounded-[8px]" : ""}
                 onClick={handleExposeImage}>
-                <Fullscreen size={20} />
+                <Fullscreen size={snapInfo ? 14 : 20} />
               </Button>
             </Tip>
             <Tip content="이미지 다운로드">
               <Button
                 variant="secondary"
                 size="icon"
+                className={snapInfo ? "flex-1 h-7 rounded-[8px]" : ""}
                 onClick={handleDownloadImage}>
-                <Download size={20} />
+                <Download size={snapInfo ? 14 : 20} />
               </Button>
             </Tip>
             <Tip content="스냅 상세보기">
               <Button
                 variant="secondary"
                 size="icon"
+                className={snapInfo ? "flex-1 h-7 rounded-[8px]" : ""}
                 onClick={handleViewSnapInfo}>
-                <TextSelect size={20} />
+                <TextSelect size={snapInfo ? 14 : 20} />
               </Button>
             </Tip>
           </div>
         </div>
       </Card>
       <div className="px-2 pb-4 space-y-1">
-        <div className="flex items-center gap-x-3 flex-wrap">
-          <div className="grow font-bold text-sm flex items-center gap-x-1">
-            <span>{snap.tpo}</span>
+        <div
+          className={cn(
+            "flex items-center gap-x-3",
+            isFixedAspect ? "" : "flex-wrap"
+          )}>
+          <div
+            className={cn(
+              "grow font-bold text-sm",
+              isFixedAspect ? "truncate" : ""
+            )}>
+            {snap.tpo}
           </div>
-          <div className="flex-none text-[11px] font-semibold opacity-50">
+          <div
+            className={cn(
+              "flex-none text-[11px] font-semibold opacity-50",
+              isFixedAspect ? "truncate" : ""
+            )}>
             {format(
               parse(`${snap.image_date}`, DATE_FORMAT.DATE_MINI, new Date()),
               DATE_FORMAT.DATE_WITH_YEAR

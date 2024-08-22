@@ -1,11 +1,9 @@
 import * as React from "react"
+import { fetchSnaps, fetchSnapsKey } from "@hook"
+import { useRootStore, useSessionStore } from "@store"
 import { useInfiniteQuery, useQueryClient } from "react-query"
 
-import { KEY } from "@src/lib/enum"
-import useRootStore from "@src/stores/root.store"
-import useSessionStore from "@src/stores/session.store"
-
-import { fetchSnaps, fetchSnapsKey } from "./use-fetch-snaps"
+import { KEY } from "@lib/enum"
 
 export const useInfiniteScroll = () => {
   const { params } = useSessionStore(({ params }) => ({ params }))

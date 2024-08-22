@@ -1,4 +1,4 @@
-import { cn } from "@src/lib/utils"
+import { cn } from "@lib/utils"
 
 type EmptyProps = {
   /** 아이콘 */
@@ -14,7 +14,7 @@ type EmptyProps = {
 }
 
 /** 비어있는 컨텐츠에 대한 폴백을 제공한다 */
-export default function Empty({
+export function Empty({
   icon,
   title,
   description,

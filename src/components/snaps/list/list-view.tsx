@@ -1,13 +1,11 @@
 import * as React from "react"
+import { useFetchSnaps } from "@hook"
+import { useRootStore, useSessionStore } from "@store"
 import { Shell } from "lucide-react"
 
-import { KEY } from "@src/lib/enum"
-import useRootStore from "@src/stores/root.store"
-import useSessionStore from "@stores/session.store"
-import { useFetchSnaps } from "@hooks/index"
-
-import { columns } from "../columns"
-import { DataTable } from "./table"
+import { KEY } from "@lib/enum"
+import { Toolbar } from "@components/snaps"
+import { DataList } from "@components/snaps/list"
 
 export function ListView() {
   const { params } = useSessionStore(({ params }) => ({ params }))
@@ -25,6 +23,7 @@ export function ListView() {
 
     useRootStore.setState(() => ({
       snaps: data.snaps,
+      hasMore: data.hasMore,
     }))
     sessionStorage.setItem(KEY.SEED, `${data.seed}`)
   }, [data])
@@ -32,7 +31,9 @@ export function ListView() {
   if (isLoading)
     return (
       <div className="flex-1 flex items-center justify-center">
-        <Shell size={24} className="animate-spin" />
+        <span className="animate-spin">
+          <Shell size={24} style={{ transform: "rotateY(180deg)" }} />
+        </span>
       </div>
     )
 
@@ -43,5 +44,10 @@ export function ListView() {
       </div>
     )
   }
-  return <DataTable snaps={data?.snaps || []} columns={columns} />
+  return (
+    <>
+      <Toolbar />
+      <DataList data={data?.snaps || []} />
+    </>
+  )
 }

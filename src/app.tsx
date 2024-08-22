@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useLocalStore } from "@store"
 import { QueryClient, QueryClientProvider } from "react-query"
 import {
   createBrowserRouter,
@@ -9,14 +10,11 @@ import {
 } from "react-router-dom"
 
 import { rootLoader } from "@api/loader"
-import useLocalStore from "@stores/local.store"
-import { TooltipProvider } from "@components/ui/tooltip"
-import Layout from "@components/shared/layout"
-import SnapsPage from "@components/snaps"
-
-import ErrorBoundary from "./components/shared/error"
-import { GridView } from "./components/snaps/grid"
-import { ListView } from "./components/snaps/list"
+import { ErrorBoundary, Layout } from "@components/shared"
+import { GridView } from "@components/snaps/grid"
+import { ListView } from "@components/snaps/list"
+import SnapsPage from "@components/snaps/page"
+import { TooltipProvider } from "@components/ui"
 
 const queryClient = new QueryClient()
 

@@ -1,4 +1,4 @@
-import { ErrorObject } from "@type/remote.type"
+import { ErrorObject } from "@interface"
 
 export const errorObjects: { [key: string]: ErrorObject } = {
   NOT_FOUND_AUTHORIZED: {

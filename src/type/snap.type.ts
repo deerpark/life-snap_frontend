@@ -1,6 +1,6 @@
-import { GRADE } from "@src/lib/enum"
+import { FacetedOption } from "@interface"
 
-import { FacetedOption } from "./root.type"
+import { GRADE } from "@lib/enum"
 
 export interface SnapType {
   snap_id: number

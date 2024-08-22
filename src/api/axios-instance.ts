@@ -1,10 +1,10 @@
+import { JwtPayload, SuccessResponse } from "@interface"
+import { CustomError } from "@remote"
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios"
 import { addSeconds } from "date-fns"
 import Cookie from "js-cookie"
-import { env } from "src/env"
 
-import { JwtPayload, SuccessResponse } from "@type/remote.type"
-import { CustomError } from "@api/error"
+import { env } from "@env"
 import {
   beforeRequest,
   onRequestError,

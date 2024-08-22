@@ -1,9 +1,7 @@
-import useLocalStore from "@src/stores/local.store"
+import { useLocalStore } from "@store"
 
-import { Separator } from "../ui/separator"
-import { Account } from "./account"
-import { ModeToggle } from "./mode-toggle"
-import { ViewToggle } from "./view-toggle"
+import { Account, ModeToggle, ViewToggle } from "@components/shared"
+import { Separator } from "@components/ui"
 
 export function Settings() {
   const { settings } = useLocalStore(({ toggle: { settings } }) => ({

@@ -1,13 +1,12 @@
+import { FacetedOption, Snap } from "@interface"
+import { useSessionStore } from "@store"
 import { create } from "zustand"
 
-import { YEAR } from "@src/lib/constants"
-import { FacetedOption } from "@src/type"
-import { Snap } from "@src/type/snap.schema"
-
-import useSessionStore from "./session.store"
+import { YEAR } from "@lib/constants"
 
 type RootState = {
   snaps: Snap[]
+  hasMore: boolean
   setSnaps: (snaps: Snap[]) => void
   snap: Snap | null
   toggleSnapDrawer: (open: boolean) => void
@@ -20,6 +19,7 @@ type RootState = {
 
 const useRootStore = create<RootState>((set, get) => ({
   snaps: [],
+  hasMore: false,
   setSnaps: (snaps) => set({ snaps }),
   snap: null,
   toggleSnapDrawer: (open) => set({ snap: open ? get().snap : null }),

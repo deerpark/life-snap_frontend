@@ -25,7 +25,6 @@
 
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@stores/*": ["src/stores/*"],
       "@hooks/*": ["src/hooks/*"],
@@ -33,7 +32,12 @@
       "@type/*": ["src/type/*"],
       "@lib/*": ["src/lib/*"],
       "@mock/*": ["src/mock/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@store": ["src/stores"],
+      "@remote": ["src/api"],
+      "@hook": ["src/hooks"],
+      "@interface": ["src/type"],
+      "@env": ["src/env"]
     },
     "types": ["vitest/globals", "vitest"]
   },

@@ -1,7 +1,6 @@
 import { useMedia } from "react-use"
 
-import { GridDesktop } from "./grid-desktop"
-import { GridMobile } from "./grid-mobile"
+import { GridDesktop, GridMobile } from "@components/snaps/grid"
 
 export function DataMasonry() {
   const isDesktop = useMedia("(min-width: 768px)")

@@ -1,10 +1,10 @@
-import { JwtPayload } from "@type/index"
+import { JwtPayload } from "@interface"
 
 export type Theme = "light" | "dark"
 
 export type Toggle = {
   settings: boolean
-  filter: boolean
+  condition: boolean
   facetedFilter: boolean
 }
 

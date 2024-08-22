@@ -1,9 +1,11 @@
+import * as React from "react"
+import { Snap } from "@interface"
+import { useRootStore } from "@store"
 import { ColumnDef } from "@tanstack/react-table"
 import { format, getDay, parse } from "date-fns"
+import { Aperture, Shell } from "lucide-react"
 
-import { Snap } from "@type/index"
-import { GRADE } from "@src/lib/enum"
-import { cn } from "@src/lib/utils"
+import { env } from "@env"
 import {
   DATE_FORMAT,
   DAY_NAME,
@@ -11,46 +13,72 @@ import {
   PROPERTY_LABEL,
   YEAR,
 } from "@lib/constants"
-import { DataTableColumnHeader } from "@components/snaps/column-header"
+import { GRADE } from "@lib/enum"
+import { cn } from "@lib/utils"
+import { DataTableColumnHeader, Image } from "@components/snaps"
+import { Card } from "@components/ui"
 
 export const columns: ColumnDef<Snap>[] = [
-  /* {
+  {
+    accessorKey: "snap_id",
+    meta: {},
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="#" className="" />
+    ),
+    cell: ({ row }) => {
+      return (
+        <div className="font-semibold text-xs whitespace-nowrap text-center">
+          {row.getValue("snap_id")}
+        </div>
+      )
+    },
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
     accessorKey: "file_name",
     meta: {
       enableFaceted: false,
     },
     header: ({ column }) => (
-      <DataTableColumnHeader
-        column={column}
-        title={PROPERTY_LABEL[column.id as keyof Snap]}
-        className="text-left pl-2"
-      />
+      <DataTableColumnHeader column={column} title="이미지" className="" />
     ),
     cell: ({ row }) => {
+      const handleExposeImage: React.MouseEventHandler<HTMLImageElement> = (
+        e
+      ) => {
+        e.stopPropagation()
+        const imageSrc = e.currentTarget.dataset.src
+        if (!imageSrc) return
+        useRootStore.setState(() => ({ imageViwerSrc: imageSrc }))
+      }
       return (
         <Card
           className={
-            "group relative rounded-2xl overflow-hidden h-8 w-8 shadow-none"
+            "group w-8 h-10 relative rounded-[8px] overflow-hidden -my-4 mx-auto shadow-none"
           }>
           <Image
+            containerClassName="w-8 h-10 aspect-auto cursor-pointer"
+            data-src={`${env.VITE_API_BASE_URL}/api/image/${row.getValue("file_name")}`}
+            className="w-8 h-10"
             src={`${env.VITE_API_BASE_URL}/api/image/${row.getValue("file_name")}`}
             loadingIcon={
-              <Shell
-                className="animate-spin text-muted-foreground/50"
-                size={24}
-              />
+              <span className="animate-spin text-muted-foreground/50">
+                <Shell size={16} style={{ transform: "rotateY(180deg)" }} />
+              </span>
             }
             fallbackIcon={
               <Aperture className="text-muted-foreground/50" size={24} />
             }
             alt=""
+            onClick={handleExposeImage}
           />
         </Card>
       )
     },
     enableSorting: false,
-    enableHiding: true,
-  }, */
+    enableHiding: false,
+  },
   {
     accessorKey: "tpo",
     meta: {},
@@ -62,7 +90,9 @@ export const columns: ColumnDef<Snap>[] = [
       />
     ),
     cell: ({ row }) => {
-      return <div className="">{row.getValue("tpo")}</div>
+      return (
+        <div className="font-bold whitespace-nowrap">{row.getValue("tpo")}</div>
+      )
     },
     enableSorting: false,
     enableHiding: false,
@@ -160,7 +190,7 @@ export const columns: ColumnDef<Snap>[] = [
       />
     ),
     cell: ({ row }) => {
-      return <div className="">{row.getValue("job")}</div>
+      return <div className="whitespace-nowrap">{row.getValue("job")}</div>
     },
     enableSorting: false,
     enableHiding: true,
@@ -193,20 +223,28 @@ export const columns: ColumnDef<Snap>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader
         column={column}
-        title=""
+        title={PROPERTY_LABEL[column.id as keyof Snap]}
         className="text-left pl-2"
       />
     ),
     cell: ({ row }) => {
       return (
-        <div className="flex items-center gap-x-2 gap-y-1 flex-wrap">
+        <div className="flex items-center gap-x-3">
           {(row.getValue("option_values") as string | undefined)
             ?.split(",")
             .map((val, i) => (
               <span
                 key={`${val}-${i}`}
-                className="border rounded-[4px] px-1 text-sm bg-muted">
-                {val}
+                className="min-w-48 flex items-center gap-x-1">
+                <span className="text-xs text-muted-foreground/70 whitespace-nowrap">
+                  {
+                    ((row.original.options as string | undefined)?.split(",") ||
+                      [])[i]
+                  }
+                </span>
+                <span className="border rounded-[4px] px-1 text-sm bg-muted whitespace-nowrap">
+                  {val}
+                </span>
               </span>
             ))}
         </div>

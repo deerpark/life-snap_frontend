@@ -1,18 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react"
+import { Snap } from "@interface"
+import { useLocalStore } from "@store"
 import { ColumnDef, VisibilityState } from "@tanstack/react-table"
 import { cloneDeep } from "lodash"
 import { Check, ChevronDown, ChevronUp, Eye } from "lucide-react"
 
-import { Snap } from "@src/type/snap.schema"
-import useLocalStore from "@stores/local.store"
 import { PROPERTY_LABEL } from "@lib/constants"
 import { cn } from "@lib/utils"
-import { Button } from "@components/ui/button"
-import { Popover, PopoverContent, PopoverTrigger } from "@components/ui/popover"
-import { Separator } from "@components/ui/separator"
-import { Tip } from "@components/ui/tooltip"
-import { columns as tableColumns } from "@components/snaps/columns"
+import { columns as tableColumns } from "@components/snaps"
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Separator,
+  Tip,
+} from "@components/ui"
 
 interface DataViewOptionsProps {
   className?: string

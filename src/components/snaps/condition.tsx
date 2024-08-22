@@ -1,18 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as React from "react"
+import { FacetedOption, GetSnapsParams, Snap } from "@interface"
+import { useSessionStore } from "@store"
 import { ColumnFilter } from "@tanstack/react-table"
 import { Check, ChevronDown, ChevronUp, CirclePlus } from "lucide-react"
 
-import { ScrollArea } from "@src/components/ui/scroll-area"
-import { PROPERTY_LABEL } from "@src/lib/constants"
-import { KEY } from "@src/lib/enum"
-import { FacetedOption, GetSnapsParams } from "@src/type"
-import { Snap } from "@src/type/snap.schema"
-import useSessionStore from "@stores/session.store"
+import { PROPERTY_LABEL } from "@lib/constants"
+import { KEY } from "@lib/enum"
 import { cn } from "@lib/utils"
-import { Badge } from "@components/ui/badge"
-import { Button } from "@components/ui/button"
 import {
+  Badge,
+  Button,
   Command,
   CommandEmpty,
   CommandGroup,
@@ -20,21 +18,24 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from "@components/ui/command"
-import { Popover, PopoverContent, PopoverTrigger } from "@components/ui/popover"
-import { Separator } from "@components/ui/separator"
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  ScrollArea,
+  Separator,
+} from "@components/ui"
 
-interface DataGridFacetedFilterProps {
+interface DataConditionProps {
   column: keyof Snap
   options: FacetedOption[]
   className?: string
 }
 
-export function Filter({
+export function DataCondition({
   column,
   options,
   className,
-}: DataGridFacetedFilterProps) {
+}: DataConditionProps) {
   const [isOpen, setIsOpen] = React.useState(false)
   const { params } = useSessionStore(({ params }) => ({
     params,

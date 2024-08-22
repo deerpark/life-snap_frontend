@@ -1,9 +1,9 @@
 import * as React from "react"
+import { useRootStore } from "@store"
 import { X } from "lucide-react"
 
-import { Button } from "@src/components/ui/button"
-import useRootStore from "@src/stores/root.store"
-import { Image } from "@components/snaps/image"
+import { Image } from "@components/snaps"
+import { Button } from "@components/ui"
 
 export function ImageViewer() {
   const { imageViwerSrc } = useRootStore(({ imageViwerSrc }) => ({

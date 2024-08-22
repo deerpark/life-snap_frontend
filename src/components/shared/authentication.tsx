@@ -4,8 +4,8 @@ import Cookies from "js-cookie"
 import { useLocation, useNavigate } from "react-router-dom"
 
 import { KEY, PAGENAMES } from "@lib/enum"
-import { routeBackToLogin } from "@lib/utils/route-back-to-login"
-import { Spinner } from "@components/shared/spinner"
+import { routeBackToLogin } from "@lib/utils"
+import { Spinner } from "@components/shared"
 
 export default function Authentication({ children }: React.PropsWithChildren) {
   const navigate = useNavigate()

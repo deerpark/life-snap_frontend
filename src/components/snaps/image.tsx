@@ -1,7 +1,7 @@
 import * as React from "react"
 import { motion } from "framer-motion"
 
-import { cn } from "@src/lib/utils"
+import { cn } from "@lib/utils"
 
 type ImageProps = {
   src: string
@@ -30,6 +30,7 @@ export const Image = React.forwardRef<HTMLImageElement | null, ImageProps>(
       className,
       onClick,
       setDimensions,
+      ...props
     }: ImageProps,
     ref
   ) {
@@ -82,6 +83,7 @@ export const Image = React.forwardRef<HTMLImageElement | null, ImageProps>(
             className={cn("w-full object-cover", className)}
             style={loading ? { display: "none" } : {}}
             onClick={onClick}
+            {...props}
           />
         ) : fallbackIcon ? (
           <div className="absolute inset-0 flex items-center justify-center">

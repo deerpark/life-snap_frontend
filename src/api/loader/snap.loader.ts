@@ -1,12 +1,9 @@
+import { SnapFilterOptionsSuccessData, SnapsSuccessData } from "@interface"
+import { API, API_ENDPOINTS } from "@remote"
 import {
   /* ActionFunctionArgs, */ ActionFunctionArgs,
   defer,
 } from "react-router-dom"
-
-import { SnapFilterOptionsSuccessData, SnapsSuccessData } from "@src/type"
-import API from "@api/axios-instance"
-
-import { API_ENDPOINTS } from "../endpoints"
 
 export const snapModule = {
   // 스냅 목록 가져오기
