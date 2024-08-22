@@ -7,6 +7,9 @@ import { API, API_ENDPOINTS } from "@remote"
 import { useQuery } from "react-query"
 import { toast } from "sonner"
 
+import { env } from "@env"
+import { filters as mockFilters } from "@mock/filters"
+
 export const fetchSnapFilterOptionsKey = "snap-filter-options"
 
 export const fetchSnapFilterOptions = async () => {
@@ -22,6 +25,10 @@ export const fetchSnapFilterOptions = async () => {
     snapFilterOptions = snapFilterOptionSchema.parse(data)
   } catch (error) {
     toast(`${error}`)
+    snapFilterOptions = mockFilters
+  }
+  if (env.VITE_USE_PROXY) {
+    return mockFilters
   }
   return snapFilterOptions
 }

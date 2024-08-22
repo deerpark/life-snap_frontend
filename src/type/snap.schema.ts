@@ -1,7 +1,5 @@
 import { z } from "zod"
 
-import { GRADE } from "@lib/enum"
-
 // We're keeping a simple non-relational schema here.
 // IRL, you will have a schema for your data models.
 export const snapSchema = z.object({
@@ -21,7 +19,7 @@ export const snapSchema = z.object({
   image_date: z.string(), // string
   age: z.union([z.string(), z.undefined()]), // string
   birth_year: z.number(), // number
-  grade: z.nativeEnum(GRADE), // GRADE enum
+  grade: z.enum(["WELCOME", "GOLD", "VIP", "VVIP"]),
   job: z.string(), // string
   city: z.string(), // string
   file_name: z

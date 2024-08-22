@@ -3,12 +3,16 @@ import dotenv from "dotenv"
 import { defineConfig, loadEnv } from "vite"
 import tsconfigPaths from "vite-tsconfig-paths"
 
+import { httpProxyMiddleware } from "./vite-middleware"
+
 /* import { ViteFaviconsPlugin } from "vite-plugin-favicon"; */
 
 dotenv.config()
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
+  const useProxy = process.env.VITE_USE_PROXY === "true"
+
   // Load env file based on `mode`
   const env = loadEnv(mode, process.cwd())
 
@@ -31,6 +35,18 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: 3000,
+      ...(useProxy
+        ? {
+            proxy: {
+              "/api": {
+                target: env.VITE_API_BASE_URL,
+                changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api/, "/api"),
+                configure: httpProxyMiddleware,
+              },
+            },
+          }
+        : {}),
     },
   }
 })

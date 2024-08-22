@@ -4,6 +4,9 @@ import { useQuery } from "react-query"
 import { toast } from "sonner"
 import { z } from "zod"
 
+import { env } from "@env"
+import { snaps as mockSnaps } from "@mock/snaps"
+
 export const fetchSnapsKey = "snaps"
 
 export const fetchSnaps = async (params: GetSnapsParams) => {
@@ -12,13 +15,18 @@ export const fetchSnaps = async (params: GetSnapsParams) => {
   })
   let snaps: Snap[] = []
   let seed: number | string | null = null
+  let hasMore = false
   try {
     snaps = z.array(snapSchema).parse(data.snaps)
     seed = data.seed
+    hasMore = data.hasMore
   } catch (error) {
-    toast(`${error}`)
+    toast((error as Error).message)
   }
-  return { snaps, seed, hasMore: data.hasMore }
+  if (env.VITE_USE_PROXY) {
+    return mockSnaps
+  }
+  return { snaps, seed, hasMore }
 }
 
 export const useFetchSnaps = (params: GetSnapsParams) => {

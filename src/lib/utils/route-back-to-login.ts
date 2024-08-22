@@ -2,8 +2,6 @@
  * route back to the login page
  */
 
-import { env } from "@env"
-
 export const routeBackToLogin = () => {
-  window.location.replace(`${env.VITE_API_BASE_URL}/api/login`)
+  window.location.replace(`/api/login`)
 }

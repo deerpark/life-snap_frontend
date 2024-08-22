@@ -8,7 +8,7 @@ export type ResponseCode = "200" | "400" | "500"
 export type ResponseStatus = "SUCCESS" | "ERROR"
 export type ResponseMessage = "성공" | "비즈니스 로직 에러"
 
-export interface SuccessResponse<T = object> extends AxiosResponse {
+export interface SuccessResponse<T = object> extends AxiosResponse<T> {
   code?: ResponseCode
   message: ResponseMessage
   /* status: ResponseStatus */

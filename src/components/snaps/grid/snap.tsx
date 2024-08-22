@@ -4,7 +4,6 @@ import { useLocalStore, useRootStore } from "@store"
 import { format, parse } from "date-fns"
 import { Aperture, Download, Fullscreen, Shell, TextSelect } from "lucide-react"
 
-import { env } from "@env"
 import { DATE_FORMAT, GRADE_COLOR, YEAR } from "@lib/constants"
 import { cn } from "@lib/utils"
 import { Image } from "@components/snaps"
@@ -27,7 +26,7 @@ export function SnapItem({ snap }: SnapItemProps) {
 
   const isViewing = snapInfo?.snap_id === snap.snap_id
 
-  const imageSrc = `${env.VITE_API_BASE_URL}/api/image/${snap.file_name}`
+  const imageSrc = `/api/image/${snap.file_name}`
 
   const handleExposeImage: React.MouseEventHandler<HTMLButtonElement> =
     React.useCallback(

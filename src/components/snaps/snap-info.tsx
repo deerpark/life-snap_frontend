@@ -2,7 +2,6 @@ import * as React from "react"
 import { useLocalStore, useRootStore } from "@store"
 import { parse } from "date-fns"
 
-import { env } from "@env"
 import { DATE_FORMAT, GRADE_COLOR, PROPERTY_LABEL, YEAR } from "@lib/constants"
 import { cn, dateFormat } from "@lib/utils"
 import { Image } from "@components/snaps"
@@ -27,7 +26,7 @@ export function SnapInfo({ header }: SnapInfoProps) {
     height: 0,
   })
   if (!snap) return null
-  const imageSrc = `${env.VITE_API_BASE_URL}/api/image/${snap.file_name}`
+  const imageSrc = `/api/image/${snap.file_name}`
   return (
     <ScrollArea className="flex-1 flex flex-col h-full px-5 py-5 md:py-2">
       <div className="text-sm grid gap-3">

@@ -5,7 +5,6 @@ import { ColumnDef } from "@tanstack/react-table"
 import { format, getDay, parse } from "date-fns"
 import { Aperture, Shell } from "lucide-react"
 
-import { env } from "@env"
 import {
   DATE_FORMAT,
   DAY_NAME,
@@ -61,9 +60,9 @@ export const columns: ColumnDef<Snap>[] = [
           }>
           <Image
             containerClassName="w-8 h-10 aspect-auto cursor-pointer"
-            data-src={`${env.VITE_API_BASE_URL}/api/image/${row.getValue("file_name")}`}
+            data-src={`/api/image/${row.getValue("file_name")}`}
             className="w-8 h-10"
-            src={`${env.VITE_API_BASE_URL}/api/image/${row.getValue("file_name")}`}
+            src={`/api/image/${row.getValue("file_name")}`}
             loadingIcon={
               <span className="animate-spin text-muted-foreground/50">
                 <Shell size={16} style={{ transform: "rotateY(180deg)" }} />

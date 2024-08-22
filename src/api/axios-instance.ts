@@ -4,7 +4,6 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios"
 import { addSeconds } from "date-fns"
 import Cookie from "js-cookie"
 
-import { env } from "@env"
 import {
   beforeRequest,
   onRequestError,
@@ -104,7 +103,7 @@ export class API {
 
   /** default axios request configuration */
   static axiosRequestConfig: AxiosRequestConfig = {
-    baseURL: `${env.VITE_API_BASE_URL}/api`,
+    baseURL: "/api",
     timeout: 30000,
     headers: API.defaultHeaders,
   }
