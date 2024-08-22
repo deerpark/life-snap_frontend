@@ -21,13 +21,15 @@ import { Card } from "@components/ui"
 export const columns: ColumnDef<Snap>[] = [
   {
     accessorKey: "snap_id",
-    meta: {},
+    meta: {
+      enableFaceted: false,
+    },
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="#" className="" />
     ),
     cell: ({ row }) => {
       return (
-        <div className="font-semibold text-xs whitespace-nowrap text-center">
+        <div className="font-semibold text-muted-foreground text-xs whitespace-nowrap text-center">
           {row.getValue("snap_id")}
         </div>
       )
@@ -137,9 +139,9 @@ export const columns: ColumnDef<Snap>[] = [
     ),
     cell: ({ row }) => {
       return (
-        <div className="flex items-center font-semibold">
+        <div className="flex items-center font-semibold text-muted-foreground">
           {YEAR - Number(row.getValue("birth_year"))}
-          <span className="text-muted-foreground font-normal">세</span>
+          <span className="text-muted-foreground/50 font-normal">세</span>
         </div>
       )
     },
@@ -190,7 +192,11 @@ export const columns: ColumnDef<Snap>[] = [
       />
     ),
     cell: ({ row }) => {
-      return <div className="whitespace-nowrap">{row.getValue("job")}</div>
+      return (
+        <div className="whitespace-nowrap text-muted-foreground">
+          {row.getValue("job")}
+        </div>
+      )
     },
     enableSorting: false,
     enableHiding: true,
@@ -209,7 +215,11 @@ export const columns: ColumnDef<Snap>[] = [
       />
     ),
     cell: ({ row }) => {
-      return <div className="">{row.getValue("city")}</div>
+      return (
+        <div className="whitespace-nowrap text-muted-foreground">
+          {row.getValue("city")}
+        </div>
+      )
     },
     enableSorting: false,
     enableHiding: true,
@@ -236,13 +246,13 @@ export const columns: ColumnDef<Snap>[] = [
               <span
                 key={`${val}-${i}`}
                 className="min-w-48 flex items-center gap-x-1">
-                <span className="text-xs text-muted-foreground/70 whitespace-nowrap">
+                <span className="text-xs text-muted-foreground/80 whitespace-nowrap">
                   {
                     ((row.original.options as string | undefined)?.split(",") ||
                       [])[i]
                   }
                 </span>
-                <span className="border rounded-[4px] px-1 text-sm bg-muted whitespace-nowrap">
+                <span className="border border-border/50 rounded-[4px] px-1 text-sm bg-muted/50 whitespace-nowrap text-muted-foreground">
                   {val}
                 </span>
               </span>

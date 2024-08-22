@@ -1,11 +1,12 @@
 import * as React from "react"
 import { RootResponse } from "@interface"
 import { API } from "@remote"
+import { useSessionStore } from "@store"
 import { Aperture } from "lucide-react"
 import { Link, Outlet, useLocation, useRouteLoaderData } from "react-router-dom"
 import { useSearchParam } from "react-use"
 
-import { TITLE } from "@lib/constants"
+import { PAGE_SIZE, TITLE } from "@lib/constants"
 import { PAGENAMES } from "@lib/enum"
 import { cn, sendToAnalyticsPageView, setOnceAnalyticsUserId } from "@lib/utils"
 import { Settings, ToggleButton } from "@components/shared"
@@ -44,11 +45,23 @@ export function Layout() {
               <Link
                 to="/"
                 className={cn(
-                  "flex items-center gap-x-2 text-primary",
+                  "flex items-center gap-x-2 text-primary group",
                   buttonVariants({ variant: "ghost" })
-                )}>
-                <Aperture size={24} strokeWidth={2.2} />
-                <span className="font-black text-base/5 hidden sm:block">
+                )}
+                onClick={() =>
+                  useSessionStore.setState(() => ({
+                    params: {
+                      page: 1,
+                      page_size: PAGE_SIZE[1],
+                    },
+                  }))
+                }>
+                <Aperture
+                  size={24}
+                  strokeWidth={2.2}
+                  className="group-hover:text-primary"
+                />
+                <span className="font-black text-base/5 hidden sm:block group-hover:text-primary">
                   {TITLE}
                 </span>
               </Link>

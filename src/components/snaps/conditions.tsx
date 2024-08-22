@@ -13,9 +13,11 @@ export function Conditions() {
   const {
     filterOptions: { jobs, grades, ages },
     toggle,
-  } = useLocalStore(({ filterOptions, toggle }) => ({
+    columnVisibility,
+  } = useLocalStore(({ filterOptions, toggle, columnVisibility }) => ({
     filterOptions,
     toggle,
+    columnVisibility,
   }))
   const hasParam = Object.entries(params)
     .filter(([key]) => ["age", "grade", "job"].includes(key))
@@ -29,13 +31,19 @@ export function Conditions() {
       />
       {toggle.condition ? (
         <>
-          <DataCondition className="flex-none" column="job" options={jobs} />
-          <DataCondition
-            className="flex-none"
-            column="grade"
-            options={grades}
-          />
-          <DataCondition className="flex-none" column="age" options={ages} />
+          {columnVisibility["job"] !== false ? (
+            <DataCondition className="flex-none" column="job" options={jobs} />
+          ) : null}
+          {columnVisibility["grade"] !== false ? (
+            <DataCondition
+              className="flex-none"
+              column="job"
+              options={grades}
+            />
+          ) : null}
+          {columnVisibility["birth_year"] !== false ? (
+            <DataCondition className="flex-none" column="age" options={ages} />
+          ) : null}
           {hasParam ? (
             <Tip content="초기화">
               <Button

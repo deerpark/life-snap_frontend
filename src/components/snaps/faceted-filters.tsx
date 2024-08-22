@@ -9,9 +9,6 @@ import { Button, Tip } from "@components/ui"
 interface RowCustomColumn {
   accessorKey: keyof Snap
 }
-const facetedFilters = columns
-  .filter((col) => col?.meta?.enableFaceted !== false)
-  .map((col) => (col as RowCustomColumn).accessorKey)
 
 export function FacetedFilters() {
   const { columnFilters, setColumnFilters } = useSessionStore(
@@ -20,6 +17,18 @@ export function FacetedFilters() {
       setColumnFilters,
     })
   )
+  const { columnVisibility } = useLocalStore(({ columnVisibility }) => ({
+    columnVisibility,
+  }))
+  const facetedFilters = columns
+    .filter(
+      (col) =>
+        col?.meta?.enableFaceted !== false &&
+        columnVisibility[
+          (col as RowCustomColumn).accessorKey as unknown as string
+        ] !== false
+    )
+    .map((col) => (col as RowCustomColumn).accessorKey)
   const { toggle } = useLocalStore(({ toggle }) => ({
     toggle,
   }))
